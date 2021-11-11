@@ -8,10 +8,8 @@ class XBTransition
 {
 public:
 	//Primary Function
-	XBTransition()
-	{
+	XBTransition();
 
-	};
 
 	~XBTransition()
 	{

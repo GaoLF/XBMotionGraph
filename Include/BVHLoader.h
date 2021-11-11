@@ -4,6 +4,10 @@
 #include "Animation.h"
 #include "Annotation.h"
 #include <string>
+#include <vector>
+
+//public Function
+void split(const std::string& s, std::vector<string>& tokens, const string& delimiters = " ");
 
 enum CHANNEL_FLAG
 {

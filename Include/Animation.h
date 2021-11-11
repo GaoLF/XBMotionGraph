@@ -13,16 +13,6 @@ public:
 	//Primary Function
 
 	//Public Function
-	void SetFrameNum(int num)
-	{
-		FrameNum = num;
-	}
-
-	int GetFrameNum()
-	{
-		return FrameNum;
-	}
-
 	vector<XBPose*>& GetAni()
 	{
 		return Ani;
@@ -38,19 +28,19 @@ public:
 		return FrameNum;
 	}
 
-	void SetFrameNum(int FrameNum)
+	void SetFrameNum(int value)
 	{
-		FrameNum = FrameNum;
+		FrameNum = value;
 	}
 
 	float GetFrameTime()
 	{
-		return FrameNum;
+		return FrameTime;
 	}
 
-	void SetFrameTime(float FrameTime)
+	void SetFrameTime(float value)
 	{
-		FrameTime = FrameTime;
+		FrameTime = value;
 	}
 
 	//Private Function

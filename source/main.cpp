@@ -12,7 +12,7 @@ int main()
 	XBAnnotation* ann = new XBAnnotation();
 	XBAnimation* ani = new XBAnimation();
 
-	loader->LoadBVHFile("test1.bvh", ani, ann);
+	loader->LoadBVHFile("Motion/test1.bvh", ani, ann);
 
 	XBGraph* graph = new XBGraph();
 	graph->Construction(ani, ann);
