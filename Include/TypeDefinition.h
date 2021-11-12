@@ -1,6 +1,11 @@
 #ifndef _TYPEDEFINITION_H
 #define _TYPEDEFINITION_H
 
+#define DEFAULT_NODE_THRESHOLD (10000.f)
+
+//The Parameter K in the Yang(2020) Paper
+#define THRESHOLD_K (int(3))
+
 enum EMOTION_TYPE
 {
 	HAPPY = 0,

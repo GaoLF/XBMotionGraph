@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\JsonCpp">
+      <UniqueIdentifier>{44cc9122-506e-479e-a0e8-7da9387aadf9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -41,6 +44,18 @@
     </ClCompile>
     <ClCompile Include="source\Transition.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Skeleton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp-src-0.5.0\src\lib_json\json_reader.cpp">
+      <Filter>Source Files\JsonCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp-src-0.5.0\src\lib_json\json_value.cpp">
+      <Filter>Source Files\JsonCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp-src-0.5.0\src\lib_json\json_writer.cpp">
+      <Filter>Source Files\JsonCpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\Transition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Skeleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

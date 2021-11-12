@@ -10,7 +10,7 @@ class XBKeyState
 public:
 	float start;
 	float end;
-	std::string flag;
+	std::string action;
 };
 
 class XBAnnotation
@@ -25,11 +25,17 @@ public:
 		return states;
 	}
 
+	XBKeyState* GetState(int index)
+	{
+		return states[index];
+	}
+
 	void SetStates(std::vector<XBKeyState*>& value)
 	{
 		states = value;
 	}
 
+	bool LoadJson(std::string filename);
 
 private:
 	std::vector<XBKeyState*> states;

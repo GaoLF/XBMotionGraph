@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jsoncpp-src-0.5.0\src\lib_json\json_reader.cpp" />
+    <ClCompile Include="jsoncpp-src-0.5.0\src\lib_json\json_value.cpp" />
+    <ClCompile Include="jsoncpp-src-0.5.0\src\lib_json\json_writer.cpp" />
     <ClCompile Include="source\Animation.cpp" />
     <ClCompile Include="source\Annotation.cpp" />
     <ClCompile Include="source\BVHLoader.cpp" />
@@ -26,6 +29,7 @@
     <ClCompile Include="source\Graph.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Pose.cpp" />
+    <ClCompile Include="source\Skeleton.cpp" />
     <ClCompile Include="source\Transition.cpp" />
     <ClCompile Include="source\Vertex.cpp" />
   </ItemGroup>
@@ -37,6 +41,7 @@
     <ClInclude Include="Include\Graph.h" />
     <ClInclude Include="Include\Pose.h" />
     <ClInclude Include="Include\Node.h" />
+    <ClInclude Include="Include\Skeleton.h" />
     <ClInclude Include="Include\Transition.h" />
     <ClInclude Include="Include\TypeDefinition.h" />
     <ClInclude Include="Include\Vertex.h" />

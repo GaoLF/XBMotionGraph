@@ -25,16 +25,19 @@ const string FLAG_STR[6] = {
 };
 
 
-class XBBVNLoader
+class XBBVNProcessor
 {
 public:
 
-	XBBVNLoader();
+	XBBVNProcessor();
 
 	//PUBLIC FUNCTION
 public:
 
 	bool LoadBVHFile(std::string FileName, XBAnimation* Ani, XBAnnotation* Ann);
+
+	//By default, we export the bvh file follow the Xp,Yp,Zp,Zr,Yr,Xr Channel
+	bool ExportBVHFile(std::string FileName, XBAnimation* Ani);
 
 	bool ParaseNumberwithChannel(vector<float>& nums, vector<CHANNEL_FLAG>& flags, Eigen::Vector3f& loc, Eigen::Vector3f& rot);
 

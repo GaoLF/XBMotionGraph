@@ -5,12 +5,12 @@
 
 using namespace std;
 
-XBBVNLoader::XBBVNLoader()
+XBBVNProcessor::XBBVNProcessor()
 {
 	skeletelonnum = 0;
 }
 
-bool XBBVNLoader::LoadBVHFile(string name, XBAnimation* Ani, XBAnnotation* Ann)
+bool XBBVNProcessor::LoadBVHFile(string name, XBAnimation* Ani, XBAnnotation* Ann)
 {
 	ifstream inFile(name, ios::in);
 
@@ -31,7 +31,7 @@ bool XBBVNLoader::LoadBVHFile(string name, XBAnimation* Ani, XBAnnotation* Ann)
 		cout << "Annotation not init!" << endl;
 	}
 
-	vector<XBPose*> animation = Ani->GetAni();
+	vector<XBPose*>& animation = Ani->GetAni();
 	XBPose* FirstPose = Ani->GetFirstPose();
 
 	bool bFirstPose = true;
@@ -46,7 +46,7 @@ bool XBBVNLoader::LoadBVHFile(string name, XBAnimation* Ani, XBAnnotation* Ann)
 		if (tmp.find("MOTION") != -1)
 		{
 			bFirstPose = false;
-			animation.push_back(FirstPose);
+			//animation.push_back(FirstPose);
 		}
 
 		//Fill the First Pose
@@ -149,6 +149,8 @@ bool XBBVNLoader::LoadBVHFile(string name, XBAnimation* Ani, XBAnnotation* Ann)
 					i += Channels[SkeIndex].size();
 					SkeIndex++;
 				}
+
+				animation.push_back(newPose);
 				CurrentFrameNum++;
 			}
 		}
@@ -167,7 +169,72 @@ bool XBBVNLoader::LoadBVHFile(string name, XBAnimation* Ani, XBAnnotation* Ann)
 	return true;
 }
 
-bool XBBVNLoader::ParaseNumberwithChannel(vector<float>& nums, vector<CHANNEL_FLAG>& flags, Eigen::Vector3f& loc, Eigen::Vector3f& rot)
+
+bool XBBVNProcessor::ExportBVHFile(string name, XBAnimation* Ani)
+{
+	if (Ani == NULL)
+	{
+		cerr << "Export error, bad point" << endl;
+	}
+
+	ofstream outFile(name);
+
+	if (!outFile)
+	{
+		cout << "Init the output file error" << endl;
+		return false;
+	}
+
+	string OutStrs;
+
+	OutStrs = "MOTION\n";
+	//char FrameNum[20];
+	//char FrameTime[20];
+
+	//itoa(Ani->GetFrameNum(), FrameNum, 10);
+	//gcvt(Ani->GetFrameTime(), FrameTime);
+
+	OutStrs += ("Frames: " + to_string(Ani->GetFrameNum()) + "\n");
+	OutStrs += ("Frame Time: " + to_string(Ani->GetFrameTime()) + "\n");
+
+	vector<XBPose*> Poses = Ani->GetAni();
+	for (size_t i = 0; i < Ani->GetFrameNum(); i++)
+	{
+		XBPose* Pose = Poses[i];
+
+		string tmp = "";
+
+		if (Pose->GetLocations().size() != Pose->GetRotations().size()) {
+			cerr << "" << endl;
+			return false;
+		}
+
+
+		size_t length = Pose->GetLocations().size();
+
+		for (int j = 0; j < length; j++)
+		{
+			tmp += (to_string(Pose->GetLocations()[j][0]) + " " + to_string(Pose->GetLocations()[j][1])
+				+ " "  + to_string(Pose->GetLocations()[j][2]) + " ");
+
+			tmp += (to_string(Pose->GetRotations()[j][2]) + " " + to_string(Pose->GetRotations()[j][1])
+				+ " "  + to_string(Pose->GetRotations()[j][0]) + " ");
+		}
+		tmp += "\n";
+
+		OutStrs += tmp;
+	}
+	
+	cout << "Succeed to Export the BVH File: " + name << endl;
+
+	outFile << OutStrs;
+	outFile.close();
+
+	return true;
+
+}
+
+bool XBBVNProcessor::ParaseNumberwithChannel(vector<float>& nums, vector<CHANNEL_FLAG>& flags, Eigen::Vector3f& loc, Eigen::Vector3f& rot)
 {
 	if (nums.size() == 0 || flags.size() == 0)
 		return false;

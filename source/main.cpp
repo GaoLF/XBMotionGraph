@@ -7,15 +7,23 @@ int main()
 {
 	cout << "Hello World" << endl;
 
-	XBBVNLoader* loader = new XBBVNLoader();
+	XBBVNProcessor* processor = new XBBVNProcessor();
 
 	XBAnnotation* ann = new XBAnnotation();
 	XBAnimation* ani = new XBAnimation();
 
-	loader->LoadBVHFile("Motion/test1.bvh", ani, ann);
+	XBAnimation* output_ani;
+	XBAnnotation* aim_ann = new XBAnnotation();
+
+	ann->LoadJson("Annotation/input1.json");
+	processor->LoadBVHFile("Motion/input1.bvh", ani, ann);
 
 	XBGraph* graph = new XBGraph();
 	graph->Construction(ani, ann);
+
+	//aim_ann->LoadJson("test1.json");
+	//output_ani = graph->Traverse(aim_ann);
 	
+	processor->ExportBVHFile("Motion/output1.bvh", ani);
 	return 0;
 }
