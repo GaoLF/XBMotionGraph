@@ -24,6 +24,8 @@ public:
 	bool Construction(XBAnimation* ani, XBAnnotation* ann);
 
 	XBAnimation* Traverse(XBAnnotation* ann);
+
+	void PrintMotionGraph();
 	//Local Function
 
 	//Public Variable

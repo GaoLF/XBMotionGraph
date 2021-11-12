@@ -3,12 +3,13 @@
 
 //One Node is Indeed One Frame
 //Somehow One Vertex is One Clip
-#include <vector>
 
 #include "Pose.h"
 #include "Edge.h"
 #include "Animation.h"
 #include "TypeDefinition.h"
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ public :
 	{
 		Pose = new XBPose();
 		Threshold = DEFAULT_NODE_THRESHOLD;
+		Index = 0;
 	};
 
 	~XBNode()
@@ -29,24 +31,50 @@ public :
 
 	//Public Function
 
+	XBPose* GetPose()
+	{
+		return Pose;
+	}
+
 	void SetPose(XBPose* pose)
 	{
 		Pose = pose;
-	}
+	};
 
 	void AddEdge(XBEdge* edge)
 	{
-		Edges.push_back(edge);
+		if (std::find(Edges.begin(), Edges.end(), edge) != Edges.end())
+			Edges.push_back(edge);
+	};
+
+	vector<XBEdge*>& GetEdges()
+	{
+		return Edges;
+	}
+
+	XBEdge* GetEdge(int index)
+	{
+		return Edges[index];
 	}
 
 	float GetThreshold()
 	{
 		return Threshold;
-	}
+	};
 
 	void SetThreshold(float value)
 	{
 		Threshold = value;
+	};
+
+	void SetIndex(int value)
+	{
+		Index = value;
+	}
+
+	int GetIndex()
+	{
+		return Index;
 	}
 
 	//Local Function
@@ -56,6 +84,7 @@ public :
 	//Local Variable
 private:
 
+	int Index;
 	XBPose* Pose;
 	vector<XBEdge*> Edges;
 

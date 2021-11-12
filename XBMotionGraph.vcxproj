@@ -25,9 +25,11 @@
     <ClCompile Include="source\Animation.cpp" />
     <ClCompile Include="source\Annotation.cpp" />
     <ClCompile Include="source\BVHLoader.cpp" />
+    <ClCompile Include="source\Cost.cpp" />
     <ClCompile Include="source\Edge.cpp" />
     <ClCompile Include="source\Graph.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Node.cpp" />
     <ClCompile Include="source\Pose.cpp" />
     <ClCompile Include="source\Skeleton.cpp" />
     <ClCompile Include="source\Transition.cpp" />
@@ -37,6 +39,7 @@
     <ClInclude Include="Include\Animation.h" />
     <ClInclude Include="Include\Annotation.h" />
     <ClInclude Include="Include\BVHLoader.h" />
+    <ClInclude Include="Include\Cost.h" />
     <ClInclude Include="Include\Edge.h" />
     <ClInclude Include="Include\Graph.h" />
     <ClInclude Include="Include\Pose.h" />

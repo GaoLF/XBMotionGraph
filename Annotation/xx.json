@@ -1,0 +1,2330 @@
+{
+"results": [
+{
+	"transcript":"I just was really busy",
+	"start":0.49,
+	"end":1.44,
+	"speaker":1,
+	"timestamps":[
+		[
+			"just", 
+			0.68,
+			0.9,
+			1
+		],
+		[
+			"was", 
+			0.9,
+			1.03,
+			1
+		],
+		[
+			"really", 
+			1.03,
+			1.24,
+			1
+		],
+		[
+			"busy", 
+			1.24,
+			1.53,
+			1
+		],
+		[
+			"I'm", 
+			1.53,
+			1.65,
+			1
+		],
+		[
+			"sorry", 
+			1.65,
+			2.18,
+			1
+		]
+	]
+},
+{
+	"transcript":"I'm sorry",
+	"start":1.5,
+	"end":2.22,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"do you have looked at the menu",
+	"start":2.52,
+	"end":3.52,
+	"speaker":1,
+	"timestamps":[
+		[
+			"you", 
+			2.64,
+			2.71,
+			1
+		],
+		[
+			"have", 
+			2.71,
+			2.82,
+			1
+		],
+		[
+			"you", 
+			2.82,
+			2.93,
+			1
+		],
+		[
+			"into", 
+			2.93,
+			3.08,
+			1
+		],
+		[
+			"the", 
+			3.08,
+			3.16,
+			1
+		],
+		[
+			"menu", 
+			3.16,
+			3.52,
+			1
+		]
+	]
+},
+{
+	"transcript":"yeah",
+	"start":4.2,
+	"end":4.71,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"So you have something wanna ordered yet?",
+	"start":4.76,
+	"end":5.559999,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"no",
+	"start":5.6,
+	"end":5.88,
+	"speaker":0,
+	"timestamps":[
+		[
+			"I", 
+			5.82,
+			5.95,
+			0
+		],
+		[
+			"was", 
+			5.95,
+			6.15,
+			0
+		],
+		[
+			"waiting", 
+			6.15,
+			6.41,
+			0
+		],
+		[
+			"for", 
+			6.41,
+			6.56,
+			0
+		],
+		[
+			"you", 
+			6.56,
+			6.82,
+			0
+		]
+	]
+},
+{
+	"transcript":" I was waiting for you",
+	"start":5.94,
+	"end":6.94,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I'm sorry",
+	"start":9.09,
+	"end":9.86,
+	"speaker":1,
+	"timestamps":[
+		[
+			"sorry", 
+			9.28,
+			9.86,
+			1
+		]
+	]
+},
+{
+	"transcript":"no it's",
+	"start":10.18,
+	"end":10.85,
+	"speaker":0,
+	"timestamps":[
+		[
+			"it", 
+			10.44,
+			10.56,
+			0
+		],
+		[
+			"no", 
+			10.56,
+			10.67,
+			0
+		],
+		[
+			"it's", 
+			10.67,
+			10.85,
+			0
+		],
+		[
+			"I", 
+			10.85,
+			10.99,
+			0
+		],
+		[
+			"mean", 
+			10.99,
+			11.14,
+			0
+		],
+		[
+			"it's", 
+			11.14,
+			11.25,
+			0
+		],
+		[
+			"fine", 
+			11.25,
+			11.68,
+			0
+		],
+		[
+			"it's", 
+			11.68,
+			11.85,
+			0
+		],
+		[
+			"just", 
+			11.85,
+			12.03,
+			0
+		],
+		[
+			"like", 
+			12.03,
+			12.25,
+			0
+		]
+	]
+},
+{
+	"transcript":" I mean it's fine ",
+	"start":10.88,
+	"end":11.76,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"it's just like",
+	"start":11.9,
+	"end":12.56,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"it's like",
+	"start":13.02,
+	"end":13.58,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"is the only time I have",
+	"start":13.61,
+	"end":14.82,
+	"speaker":0,
+	"timestamps":[
+		[
+			"the", 
+			13.67,
+			13.76,
+			0
+		],
+		[
+			"only", 
+			13.76,
+			13.95,
+			0
+		],
+		[
+			"time", 
+			13.95,
+			14.27,
+			0
+		],
+		[
+			"I", 
+			14.27,
+			14.34,
+			0
+		],
+		[
+			"have", 
+			14.34,
+			14.82,
+			0
+		]
+	]
+},
+{
+	"transcript":"and like we plan this out",
+	"start":14.89,
+	"end":16,
+	"speaker":0,
+	"timestamps":[
+		[
+			"like", 
+			15.11,
+			15.23,
+			0
+		],
+		[
+			"the", 
+			15.23,
+			15.32,
+			0
+		],
+		[
+			"plan", 
+			15.32,
+			15.56,
+			0
+		],
+		[
+			"the", 
+			15.56,
+			15.63,
+			0
+		],
+		[
+			"south", 
+			15.63,
+			16,
+			0
+		],
+		[
+			"so", 
+			16,
+			16.16,
+			0
+		],
+		[
+			"it", 
+			16.16,
+			16.24,
+			0
+		],
+		[
+			"kind", 
+			16.24,
+			16.41,
+			0
+		],
+		[
+			"of", 
+			16.41,
+			16.47,
+			0
+		],
+		[
+			"that", 
+			16.47,
+			16.66,
+			0
+		]
+	]
+},
+{
+	"transcript":" so it kind of that",
+	"start":16.06,
+	"end":16.46,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I was busy",
+	"start":16.48,
+	"end":17.44,
+	"speaker":1,
+	"timestamps":[
+		[
+			"was", 
+			16.87,
+			17.08,
+			1
+		],
+		[
+			"busy", 
+			17.08,
+			17.44,
+			1
+		]
+	]
+},
+{
+	"transcript":"I know",
+	"start":17.68,
+	"end":18.34,
+	"speaker":0,
+	"timestamps":[
+		[
+			"know", 
+			17.98,
+			18.34,
+			0
+		]
+	]
+},
+{
+	"transcript":"but like",
+	"start":18.39,
+	"end":18.85,
+	"speaker":0,
+	"timestamps":[
+		[
+			"like", 
+			18.57,
+			18.85,
+			0
+		]
+	]
+},
+{
+	"transcript":"Carolyn we don't get to do this very often",
+	"start":19.34,
+	"end":20.96,
+	"speaker":0,
+	"timestamps":[
+		[
+			"we", 
+			19.7,
+			19.77,
+			0
+		],
+		[
+			"don't", 
+			19.77,
+			19.92,
+			0
+		],
+		[
+			"get", 
+			19.92,
+			20.03,
+			0
+		],
+		[
+			"to", 
+			20.03,
+			20.11,
+			0
+		],
+		[
+			"do", 
+			20.11,
+			20.28,
+			0
+		],
+		[
+			"this", 
+			20.28,
+			20.46,
+			0
+		],
+		[
+			"very", 
+			20.46,
+			20.68,
+			0
+		],
+		[
+			"often", 
+			20.68,
+			20.96,
+			0
+		]
+	]
+},
+{
+	"transcript":"I know but like",
+	"start":20.99,
+	"end":21.84,
+	"speaker":1,
+	"timestamps":[
+		[
+			"know", 
+			21.12,
+			21.38,
+			1
+		],
+		[
+			"but", 
+			21.38,
+			21.58,
+			1
+		],
+		[
+			"like", 
+			21.58,
+			21.84,
+			1
+		]
+	]
+},
+{
+	"transcript":"I am sorry",
+	"start":21.87,
+	"end":22.4,
+	"speaker":1,
+	"timestamps":[
+		[
+			"sorry", 
+			22.04,
+			22.4,
+			1
+		]
+	]
+},
+{
+	"transcript":"I had something to do",
+	"start":22.45,
+	"end":23.51,
+	"speaker":1,
+	"timestamps":[
+		[
+			"had", 
+			22.65,
+			22.89,
+			1
+		]
+	]
+},
+{
+	"transcript":"I had homework like",
+	"start":23.56,
+	"end":24.39,
+	"speaker":1,
+	"timestamps":[
+		[
+			"do", 
+			23.22,
+			23.46,
+			1
+		],
+		[
+			"I", 
+			23.46,
+			23.61,
+			1
+		],
+		[
+			"had", 
+			23.61,
+			23.76,
+			1
+		],
+		[
+			"homework", 
+			23.76,
+			24.21,
+			1
+		],
+		[
+			"like", 
+			24.21,
+			24.39,
+			1
+		]
+	]
+},
+{
+	"transcript":"do you understand",
+	"start":24.5,
+	"end":25.21,
+	"speaker":1,
+	"timestamps":[
+		[
+			"you", 
+			24.66,
+			24.77,
+			1
+		],
+		[
+			"understand", 
+			24.77,
+			25.28,
+			1
+		],
+		[
+			"I", 
+			25.28,
+			25.33,
+			1
+		],
+		[
+			"do", 
+			25.33,
+			25.54,
+			1
+		],
+		[
+			"I", 
+			25.54,
+			25.71,
+			1
+		],
+		[
+			"do", 
+			25.71,
+			25.91,
+			1
+		],
+		[
+			"understand", 
+			25.91,
+			26.55,
+			1
+		],
+		[
+			"and", 
+			26.55,
+			26.74,
+			1
+		],
+		[
+			"just", 
+			26.74,
+			26.95,
+			1
+		],
+		[
+			"like", 
+			26.95,
+			27.15,
+			1
+		]
+	]
+},
+{
+	"transcript":" I do I do understand",
+	"start":25.26,
+	"end":26.18,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I'm just like ",
+	"start":26.32,
+	"end":27.18,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I'm just trying to like",
+	"start":27.66,
+	"end":28.55,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":" tell you like",
+	"start":28.68,
+	"end":29.08,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"it's",
+	"start":29.2,
+	"end":29.56,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"it doesn't feel super great",
+	"start":30.05,
+	"end":31.59,
+	"speaker":0,
+	"timestamps":[
+		[
+			"doesn't", 
+			30.21,
+			30.54,
+			0
+		],
+		[
+			"feel", 
+			30.54,
+			30.84,
+			0
+		],
+		[
+			"super", 
+			30.84,
+			31.18,
+			0
+		],
+		[
+			"great", 
+			31.18,
+			31.59,
+			0
+		]
+	]
+},
+{
+	"transcript":"when you show up late",
+	"start":31.64,
+	"end":33.13,
+	"speaker":0,
+	"timestamps":[
+		[
+			"the", 
+			31.79,
+			31.87,
+			0
+		],
+		[
+			"shop", 
+			31.87,
+			32.29,
+			0
+		]
+	]
+},
+{
+	"transcript":"I'm doing the best I can",
+	"start":33.18,
+	"end":34.67,
+	"speaker":1,
+	"timestamps":[
+		[
+			"I'm", 
+			33.34,
+			33.54,
+			1
+		],
+		[
+			"doing", 
+			33.54,
+			33.84,
+			1
+		],
+		[
+			"the", 
+			33.84,
+			33.92,
+			1
+		],
+		[
+			"best", 
+			33.92,
+			34.16,
+			1
+		],
+		[
+			"I", 
+			34.16,
+			34.2,
+			1
+		],
+		[
+			"can", 
+			34.2,
+			34.67,
+			1
+		]
+	]
+},
+{
+	"transcript":"understand",
+	"start":35.63,
+	"end":36.1,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I just it's just like ",
+	"start":36.51,
+	"end":37.13,
+	"speaker":0,
+	"timestamps":[
+		[
+			"just", 
+			36.63,
+			36.82,
+			0
+		],
+		[
+			"it's", 
+			36.82,
+			36.92,
+			0
+		],
+		[
+			"just", 
+			36.92,
+			37.1,
+			0
+		],
+		[
+			"like", 
+			37.1,
+			37.23,
+			0
+		],
+		[
+			"I", 
+			37.23,
+			37.3,
+			0
+		],
+		[
+			"have", 
+			37.3,
+			37.49,
+			0
+		],
+		[
+			"to", 
+			37.49,
+			37.65,
+			0
+		]
+	]
+},
+{
+	"transcript":"I have to express to you",
+	"start":37.18,
+	"end":38.8,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"what",
+	"start":38.81,
+	"end":39.23,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"it's like",
+	"start":42.26,
+	"end":42.66,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"we plan this like",
+	"start":43.22,
+	"end":43.83,
+	"speaker":0,
+	"timestamps":[
+		[
+			"it's", 
+			43.51,
+			43.67,
+			0
+		],
+		[
+			"like", 
+			43.67,
+			43.83,
+			0
+		]
+	]
+},
+{
+	"transcript":"three weeks ago",
+	"start":43.91,
+	"end":44.61,
+	"speaker":0,
+	"timestamps":[
+		[
+			"weeks", 
+			44.09,
+			44.26,
+			0
+		],
+		[
+			"ago", 
+			44.26,
+			44.61,
+			0
+		]
+	]
+},
+{
+	"transcript":"em hm?",
+	"start":44.68,
+	"end":45.6,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"and",
+	"start":45.69,
+	"end":46.52,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"you know",
+	"start":47.34,
+	"end":47.96,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"em hm?",
+	"start":47.34,
+	"end":47.94,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"we talked about it and",
+	"start":48,
+	"end":49.29,
+	"speaker":0,
+	"timestamps":[
+		[
+			"about", 
+			48.22,
+			48.53,
+			0
+		],
+		[
+			"it", 
+			48.53,
+			48.75,
+			0
+		]
+	]
+},
+{
+	"transcript":"I was really high for it is like",
+	"start":49.4,
+	"end":50.46,
+	"speaker":0,
+	"timestamps":[
+		[
+			"was", 
+			49.51,
+			49.66,
+			0
+		],
+		[
+			"really", 
+			49.66,
+			49.83,
+			0
+		],
+		[
+			"high", 
+			49.83,
+			49.97,
+			0
+		],
+		[
+			"for", 
+			49.97,
+			50.29,
+			0
+		],
+		[
+			"it", 
+			50.29,
+			50.46,
+			0
+		],
+		[
+			"is", 
+			50.46,
+			50.58,
+			0
+		],
+		[
+			"like", 
+			50.58,
+			50.74,
+			0
+		]
+	]
+},
+{
+	"transcript":"it's my favorite restaurant",
+	"start":50.55,
+	"end":51.89,
+	"speaker":0,
+	"timestamps":[
+		[
+			"favorite", 
+			51.05,
+			51.33,
+			0
+		],
+		[
+			"restaurant", 
+			51.33,
+			51.89,
+			0
+		]
+	]
+},
+{
+	"transcript":"and",
+	"start":52.13,
+	"end":52.9,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"we haven't really been able to hang out like at all",
+	"start":53.04,
+	"end":54.94,
+	"speaker":0,
+	"timestamps":[
+		[
+			"haven't", 
+			53.12,
+			53.33,
+			0
+		],
+		[
+			"really", 
+			53.33,
+			53.57,
+			0
+		],
+		[
+			"been", 
+			53.57,
+			53.68,
+			0
+		],
+		[
+			"able", 
+			53.68,
+			53.82,
+			0
+		],
+		[
+			"to", 
+			53.82,
+			53.88,
+			0
+		],
+		[
+			"hang", 
+			53.88,
+			54.06,
+			0
+		],
+		[
+			"out", 
+			54.06,
+			54.21,
+			0
+		],
+		[
+			"like", 
+			54.21,
+			54.36,
+			0
+		],
+		[
+			"at", 
+			54.36,
+			54.46,
+			0
+		],
+		[
+			"all", 
+			54.46,
+			54.84,
+			0
+		]
+	]
+},
+{
+	"transcript":"so",
+	"start":55.81,
+	"end":56.47,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"because we've both been really busy",
+	"start":56.84,
+	"end":58.29,
+	"speaker":1,
+	"timestamps":[
+		[
+			"we've", 
+			57.21,
+			57.38,
+			1
+		],
+		[
+			"both", 
+			57.38,
+			57.59,
+			1
+		],
+		[
+			"been", 
+			57.59,
+			57.71,
+			1
+		],
+		[
+			"really", 
+			57.71,
+			57.94,
+			1
+		],
+		[
+			"busy", 
+			57.94,
+			58.29,
+			1
+		]
+	]
+},
+{
+	"transcript":"I know",
+	"start":58.34,
+	"end":58.46,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"It's so",
+	"start":58.44,
+	"end":59.08,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"you understand this",
+	"start":59.16,
+	"end":60.28,
+	"speaker":1,
+	"timestamps":[
+		[
+			"understand", 
+			59.23,
+			59.9,
+			1
+		]
+	]
+},
+{
+	"transcript":"yeah",
+	"start":60.34,
+	"end":60.64,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"like",
+	"start":60.75,
+	"end":61.1,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"we made it clear at the beginning of the semester ",
+	"start":61.73,
+	"end":63.61,
+	"speaker":1,
+	"timestamps":[
+		[
+			"made", 
+			61.86,
+			62.12,
+			1
+		],
+		[
+			"it", 
+			62.12,
+			62.21,
+			1
+		],
+		[
+			"clear", 
+			62.21,
+			62.68,
+			1
+		],
+		[
+			"at", 
+			62.68,
+			62.85,
+			1
+		],
+		[
+			"the", 
+			62.85,
+			62.91,
+			1
+		],
+		[
+			"beginning", 
+			62.91,
+			63.18,
+			1
+		],
+		[
+			"of", 
+			63.18,
+			63.26,
+			1
+		],
+		[
+			"the", 
+			63.26,
+			63.34,
+			1
+		],
+		[
+			"semester", 
+			63.34,
+			63.77,
+			1
+		],
+		[
+			"like", 
+			63.77,
+			64.17,
+			1
+		]
+	]
+},
+{
+	"transcript":"like",
+	"start":63.7,
+	"end":64.12,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"look like we're not gonna be able to see each other very much ",
+	"start":64.48,
+	"end":66.64,
+	"speaker":1,
+	"timestamps":[
+		[
+			"like", 
+			64.78,
+			64.92,
+			1
+		],
+		[
+			"we're", 
+			64.92,
+			65.02,
+			1
+		],
+		[
+			"not", 
+			65.02,
+			65.12,
+			1
+		],
+		[
+			"gonna", 
+			65.12,
+			65.24,
+			1
+		],
+		[
+			"be", 
+			65.24,
+			65.3,
+			1
+		],
+		[
+			"able", 
+			65.3,
+			65.43,
+			1
+		],
+		[
+			"to", 
+			65.43,
+			65.49,
+			1
+		],
+		[
+			"see", 
+			65.49,
+			65.64,
+			1
+		],
+		[
+			"each", 
+			65.64,
+			65.78,
+			1
+		],
+		[
+			"other", 
+			65.78,
+			65.95,
+			1
+		],
+		[
+			"very", 
+			65.95,
+			66.17,
+			1
+		],
+		[
+			"much", 
+			66.17,
+			66.63,
+			1
+		],
+		[
+			"like", 
+			66.63,
+			67.08,
+			1
+		]
+	]
+},
+{
+	"transcript":"like",
+	"start":66.72,
+	"end":67.1,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I might",
+	"start":67.73,
+	"end":68.37,
+	"speaker":1,
+	"timestamps":[
+		[
+			"might", 
+			67.84,
+			68.37,
+			1
+		]
+	]
+},
+{
+	"transcript":"have to like do homework ",
+	"start":68.44,
+	"end":69.67001,
+	"speaker":1,
+	"timestamps":[
+		[
+			"to", 
+			68.65,
+			68.77,
+			1
+		],
+		[
+			"like", 
+			68.77,
+			68.97,
+			1
+		],
+		[
+			"do", 
+			68.97,
+			69.15,
+			1
+		],
+		[
+			"homework", 
+			69.15,
+			69.57,
+			1
+		],
+		[
+			"or", 
+			69.57,
+			69.64,
+			1
+		],
+		[
+			"say", 
+			69.64,
+			69.87,
+			1
+		],
+		[
+			"late", 
+			69.87,
+			70.47,
+			1
+		]
+	]
+},
+{
+	"transcript":"or stay late for rehearsal ",
+	"start":69.75999,
+	"end":70.99999,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"like I can not in control of that",
+	"start":71.07999,
+	"end":72.97,
+	"speaker":1,
+	"timestamps":[
+		[
+			"rehearsal", 
+			70.65,
+			71.23,
+			1
+		],
+		[
+			"like", 
+			71.23,
+			71.43,
+			1
+		],
+		[
+			"I", 
+			71.43,
+			71.55,
+			1
+		],
+		[
+			"can", 
+			71.55,
+			71.82,
+			1
+		],
+		[
+			"not", 
+			71.82,
+			72.12,
+			1
+		],
+		[
+			"in", 
+			72.12,
+			72.21,
+			1
+		],
+		[
+			"control", 
+			72.21,
+			72.71,
+			1
+		]
+	]
+},
+{
+	"transcript":"yeah",
+	"start":73.14,
+	"end":73.39,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I get",
+	"start":73.56,
+	"end":74.05,
+	"speaker":0,
+	"timestamps":[
+		[
+			"get", 
+			73.63,
+			73.83,
+			0
+		]
+	]
+},
+{
+	"transcript":"I get it",
+	"start":74.67,
+	"end":75.16,
+	"speaker":0,
+	"timestamps":[
+		[
+			"guess", 
+			74.73,
+			74.9,
+			0
+		]
+	]
+},
+{
+	"transcript":"it's okay",
+	"start":75.94001,
+	"end":76.54,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"alright",
+	"start":76.92,
+	"end":77.54,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"are you sure",
+	"start":79.08,
+	"end":79.65,
+	"speaker":1,
+	"timestamps":[
+		[
+			"you", 
+			79.2,
+			79.26,
+			1
+		],
+		[
+			"sure", 
+			79.26,
+			79.65,
+			1
+		]
+	]
+},
+{
+	"transcript":"yeah",
+	"start":79.85,
+	"end":80.18,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"no",
+	"start":80.3,
+	"end":80.66,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"it's fine",
+	"start":80.78,
+	"end":81.42,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I'll just",
+	"start":81.48,
+	"end":81.87,
+	"speaker":0,
+	"timestamps":[
+		[
+			"just", 
+			81.64,
+			81.87,
+			0
+		]
+	]
+},
+{
+	"transcript":"I'll get over it",
+	"start":82.36,
+	"end":82.9,
+	"speaker":0,
+	"timestamps":[
+		[
+			"get", 
+			82.49,
+			82.61,
+			0
+		],
+		[
+			"over", 
+			82.61,
+			82.79,
+			0
+		],
+		[
+			"it", 
+			82.79,
+			82.9,
+			0
+		]
+	]
+},
+{
+	"transcript":"sound again",
+	"start":82.99,
+	"end":83.69,
+	"speaker":0,
+	"timestamps":[
+		[
+			"again", 
+			83.27,
+			83.51,
+			0
+		]
+	]
+},
+{
+	"transcript":"unbelievable",
+	"start":84.37,
+	"end":85.11,
+	"speaker":1,
+	"timestamps":[
+		[
+			"live", 
+			84.55,
+			84.83,
+			1
+		],
+		[
+			"on", 
+			84.83,
+			85.11,
+			1
+		]
+	]
+},
+{
+	"transcript":"what",
+	"start":85.56,
+	"end":85.81,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"you're just so ridiculous sometimes",
+	"start":86.65,
+	"end":88.35,
+	"speaker":1,
+	"timestamps":[
+		[
+			"so", 
+			87,
+			87.32,
+			1
+		],
+		[
+			"ridiculous", 
+			87.32,
+			87.91,
+			1
+		],
+		[
+			"sometimes", 
+			87.91,
+			88.36,
+			1
+		],
+		[
+			"what", 
+			88.36,
+			88.48,
+			1
+		],
+		[
+			"what", 
+			88.48,
+			88.62,
+			1
+		],
+		[
+			"what", 
+			88.62,
+			88.91,
+			1
+		]
+	]
+},
+{
+	"transcript":"what what what",
+	"start":88.42001,
+	"end":88.98,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"what I'm doing",
+	"start":89.2,
+	"end":89.73,
+	"speaker":0,
+	"timestamps":[
+		[
+			"we're", 
+			89.34,
+			89.45,
+			0
+		],
+		[
+			"doing", 
+			89.45,
+			89.73,
+			0
+		]
+	]
+},
+{
+	"transcript":"you just like",
+	"start":90.39,
+	"end":91.14,
+	"speaker":1,
+	"timestamps":[
+		[
+			"just", 
+			90.57,
+			90.8,
+			1
+		],
+		[
+			"like", 
+			90.8,
+			91.14,
+			1
+		]
+	]
+},
+{
+	"transcript":"you just make everything a big deal",
+	"start":91.3,
+	"end":92.89,
+	"speaker":1,
+	"timestamps":[
+		[
+			"just", 
+			91.44,
+			91.62,
+			1
+		],
+		[
+			"make", 
+			91.62,
+			91.9,
+			1
+		],
+		[
+			"everything", 
+			91.9,
+			92.22,
+			1
+		],
+		[
+			"a", 
+			92.22,
+			92.28,
+			1
+		],
+		[
+			"big", 
+			92.28,
+			92.42,
+			1
+		],
+		[
+			"deal", 
+			92.42,
+			92.89,
+			1
+		]
+	]
+},
+{
+	"transcript":"I'm trying to get past that",
+	"start":93.09,
+	"end":94.58,
+	"speaker":0,
+	"timestamps":[
+		[
+			"trying", 
+			93.25,
+			93.78,
+			0
+		],
+		[
+			"to", 
+			93.78,
+			93.93,
+			0
+		],
+		[
+			"get", 
+			93.93,
+			94.12,
+			0
+		],
+		[
+			"past", 
+			94.12,
+			94.43,
+			0
+		],
+		[
+			"that", 
+			94.43,
+			94.58,
+			0
+		]
+	]
+},
+{
+	"transcript":"it is literally",
+	"start":94.61,
+	"end":95.7,
+	"speaker":1,
+	"timestamps":[
+		[
+			"literally", 
+			94.82,
+			95.7,
+			1
+		]
+	]
+},
+{
+	"transcript":"not that big of a deal",
+	"start":95.82,
+	"end":97.57,
+	"speaker":1,
+	"timestamps":[
+		[
+			"that", 
+			96.28,
+			96.69,
+			1
+		]
+	]
+},
+{
+	"transcript":"okay",
+	"start":97.67,
+	"end":98.15,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"it's not a big deal",
+	"start":98.36,
+	"end":99.11,
+	"speaker":0,
+	"timestamps":[
+		[
+			"not", 
+			98.5,
+			98.73,
+			0
+		],
+		[
+			"a", 
+			98.73,
+			98.77,
+			0
+		],
+		[
+			"big", 
+			98.77,
+			98.89,
+			0
+		],
+		[
+			"deal", 
+			98.89,
+			99.11,
+			0
+		]
+	]
+},
+{
+	"transcript":"like I've literally never done this before",
+	"start":100.04,
+	"end":101.26,
+	"speaker":1,
+	"timestamps":[
+		[
+			"I've", 
+			100.19,
+			100.35,
+			1
+		],
+		[
+			"literally", 
+			100.35,
+			100.71,
+			1
+		],
+		[
+			"never", 
+			100.71,
+			100.89,
+			1
+		],
+		[
+			"done", 
+			100.89,
+			101.06,
+			1
+		]
+	]
+},
+{
+	"transcript":"Caroline",
+	"start":101.45,
+	"end":101.76,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"it's not a big deal",
+	"start":102.19,
+	"end":102.98,
+	"speaker":0,
+	"timestamps":[
+		[
+			"not", 
+			102.37,
+			102.59,
+			0
+		],
+		[
+			"again", 
+			102.59,
+			102.96,
+			0
+		]
+	]
+},
+{
+	"transcript":"whatever",
+	"start":108.67,
+	"end":109.21,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I am so dumb",
+	"start":109.46,
+	"end":110.64,
+	"speaker":1,
+	"timestamps":[
+		[
+			"done", 
+			110.28,
+			110.64,
+			1
+		]
+	]
+},
+{
+	"transcript":"okay",
+	"start":110.75,
+	"end":111.27,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"okay",
+	"start":111.45,
+	"end":111.85,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"look",
+	"start":113.14,
+	"end":113.46,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"let's just",
+	"start":114.25,
+	"end":114.69,
+	"speaker":0,
+	"timestamps":[
+		[
+			"just", 
+			114.4,
+			114.69,
+			0
+		]
+	]
+},
+{
+	"transcript":"let's just ",
+	"start":114.83,
+	"end":115.24,
+	"speaker":0,
+	"timestamps":[
+		[
+			"just", 
+			114.98,
+			115.17,
+			0
+		],
+		[
+			"have", 
+			115.17,
+			115.29,
+			0
+		],
+		[
+			"you", 
+			115.29,
+			115.35,
+			0
+		],
+		[
+			"decide", 
+			115.35,
+			115.68,
+			0
+		],
+		[
+			"what", 
+			115.68,
+			115.79,
+			0
+		],
+		[
+			"you", 
+			115.79,
+			115.85,
+			0
+		],
+		[
+			"want", 
+			115.85,
+			116.16,
+			0
+		]
+	]
+},
+{
+	"transcript":"have you decide what you want",
+	"start":115.26,
+	"end":116.12,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"yes",
+	"start":116.28,
+	"end":116.7,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I've decided what I want",
+	"start":116.75,
+	"end":117.76,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"want to get chicken?",
+	"start":117.92,
+	"end":118.46,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"no I'm gonna get this buffalo chicken probis",
+	"start":118.5,
+	"end":120.34,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"Really good there",
+	"start":119.16,
+	"end":120.2,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"they're actually my favorite ",
+	"start":120.52,
+	"end":121.78,
+	"speaker":0,
+	"timestamps":[
+		[
+			"actually", 
+			120.66,
+			121.08,
+			0
+		]
+	]
+},
+{
+	"transcript":"rogis?",
+	"start":121.4,
+	"end":122.04,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"buffalo chicken robies",
+	"start":122.3,
+	"end":123.29,
+	"speaker":0,
+	"timestamps":[
+		[
+			"chicken", 
+			122.57,
+			122.84,
+			0
+		],
+		[
+			"probing", 
+			122.84,
+			123.15,
+			0
+		],
+		[
+			"group", 
+			123.15,
+			123.39,
+			0
+		],
+		[
+			"user", 
+			123.39,
+			123.69,
+			0
+		]
+	]
+},
+{
+	"transcript":"robies are gross",
+	"start":123.22,
+	"end":124.32,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"well",
+	"start":124.42,
+	"end":124.83,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"I don't think they are gross",
+	"start":125.21,
+	"end":125.94,
+	"speaker":0,
+	"timestamps":[
+		[
+			"don't", 
+			125.37,
+			125.63,
+			0
+		],
+		[
+			"think", 
+			125.63,
+			125.8,
+			0
+		],
+		[
+			"that", 
+			125.8,
+			125.94,
+			0
+		]
+	]
+},
+{
+	"transcript":"okay",
+	"start":126.48,
+	"end":127.03,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"on that we've gotten that seven",
+	"start":128.04,
+	"end":129.29,
+	"speaker":1,
+	"timestamps":[
+		[
+			"that", 
+			128.28,
+			128.48,
+			1
+		],
+		[
+			"we've", 
+			128.48,
+			128.61,
+			1
+		],
+		[
+			"gotten", 
+			128.61,
+			128.88,
+			1
+		],
+		[
+			"that", 
+			128.88,
+			129.05,
+			1
+		],
+		[
+			"seven", 
+			129.05,
+			129.29,
+			1
+		]
+	]
+},
+{
+	"transcript":"good",
+	"start":129.94,
+	"end":130.46,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"good",
+	"start":130.52,
+	"end":131.02,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"right",
+	"start":131.44,
+	"end":131.84,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"great",
+	"start":132.03,
+	"end":132.44,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"fantastic",
+	"start":132.89,
+	"end":133.55,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"waiter",
+	"start":133.82,
+	"end":134.22,
+	"speaker":0,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"yes",
+	"start":134.77,
+	"end":135.34,
+	"speaker":1,
+	"timestamps":[
+	]
+},
+{
+	"transcript":"indeed",
+	"start":136.47,
+	"end":137.2,
+	"speaker":1,
+	"timestamps":[
+	]
+}
+]
+}

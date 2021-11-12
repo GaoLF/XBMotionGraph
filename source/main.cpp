@@ -20,7 +20,7 @@ int main()
 
 	XBGraph* graph = new XBGraph();
 	graph->Construction(ani, ann);
-
+	graph->PrintMotionGraph();
 	//aim_ann->LoadJson("test1.json");
 	//output_ani = graph->Traverse(aim_ann);
 	

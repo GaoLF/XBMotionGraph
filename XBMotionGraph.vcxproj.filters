@@ -57,6 +57,12 @@
     <ClCompile Include="jsoncpp-src-0.5.0\src\lib_json\json_writer.cpp">
       <Filter>Source Files\JsonCpp</Filter>
     </ClCompile>
+    <ClCompile Include="source\Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Cost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Animation.h">
@@ -90,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\Skeleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cost.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
