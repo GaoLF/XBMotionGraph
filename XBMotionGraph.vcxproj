@@ -31,8 +31,10 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Node.cpp" />
     <ClCompile Include="source\Pose.cpp" />
+    <ClCompile Include="source\Prediction.cpp" />
     <ClCompile Include="source\Skeleton.cpp" />
     <ClCompile Include="source\Transition.cpp" />
+    <ClCompile Include="source\TypeDefinition.cpp" />
     <ClCompile Include="source\Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +46,7 @@
     <ClInclude Include="Include\Graph.h" />
     <ClInclude Include="Include\Pose.h" />
     <ClInclude Include="Include\Node.h" />
+    <ClInclude Include="Include\Prediction.h" />
     <ClInclude Include="Include\Skeleton.h" />
     <ClInclude Include="Include\Transition.h" />
     <ClInclude Include="Include\TypeDefinition.h" />

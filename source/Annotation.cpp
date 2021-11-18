@@ -6,9 +6,23 @@
 #include <cassert>
 using namespace std;
 
-XBAnnotation::XBAnnotation()
+XBKeyState::XBKeyState()
+{
+	start = 0;
+	end = 0;
+	action = ACTION_TYPE::IDLE;
+}
+
+XBKeyState::~XBKeyState()
 {
 
+}
+
+
+
+XBAnnotation::XBAnnotation()
+{
+	TotalDuration = -1.f;
 }
 
 bool XBAnnotation::LoadJson(string filename)
@@ -24,18 +38,112 @@ bool XBAnnotation::LoadJson(string filename)
 		cerr << "parse failed \n";
 		return false;
 	}
+
 	Json::Value arrayObj = root["Annotations"];
 
-	for (int i = 0; i < arrayObj.size(); i++)
+	for (int i = 0; i < (int)arrayObj.size(); i++)
 	{
 		XBKeyState* newstate = new XBKeyState();
 		newstate->start  = (float)arrayObj[i]["start"].asDouble();
 		newstate->end    = (float)arrayObj[i]["end"].asDouble();
-		newstate->action = arrayObj[i]["action"].asString();
+		string tmp_str   = arrayObj[i]["action"].asString();
+		ACTION_TYPE tmp_action = ACTION_TYPE::IDLE;
+		for (int j = 0; j < (int)ACTION_TYPE::ACTIONTYPENUM; j++)
+		{
+			if (tmp_str == Str_Action_Type[j])
+			{
+				tmp_action = (ACTION_TYPE)j;
+			}
+		}
+
+		newstate->action = tmp_action;
 
 		states.push_back(newstate);
 	}
 
 	ifs.close();
+	return true;
+}
+
+bool XBAnnotation::AddIdleState()
+{
+	if (TotalDuration < 0)
+	{
+		cerr << "Warning: The Annotation's duration is not initialized." << endl;
+	}
+
+	int length = (int)states.size();
+
+	for (int i = 0; i < length; i++)
+	{
+		if (i == 0)
+		{
+			float tmp_start = states[0]->start;
+			if (tmp_start > INTERVAL_2_IDLE)
+			{
+				XBKeyState* newstate = new XBKeyState();
+
+				newstate->start = 0.f;
+				newstate->end = tmp_start - INTERVAL_2_IDLE;
+				newstate->action = ACTION_TYPE::IDLE;
+
+				states.push_back(newstate);
+			}
+		}
+		else
+		{
+			XBKeyState* pre_state = states[i - 1];
+			if ((states[i]->start - states[i - 1]->end) > (INTERVAL_2_IDLE * 2))
+			{
+				XBKeyState* newstate = new XBKeyState();
+
+				newstate->start = states[i - 1]->end + INTERVAL_2_IDLE;
+				newstate->end = states[i]->start - INTERVAL_2_IDLE;
+				newstate->action = ACTION_TYPE::IDLE;
+
+				states.push_back(newstate);
+			}
+		}
+	}
+
+	if (length > 0)
+	{
+		float tmp_end = states[length - 1]->end;
+		if (TotalDuration - tmp_end > INTERVAL_2_IDLE)
+		{
+			XBKeyState* newstate = new XBKeyState();
+
+			newstate->start = states[length - 1]->end + INTERVAL_2_IDLE;
+			newstate->end = TotalDuration;
+			newstate->action = ACTION_TYPE::IDLE;
+
+			states.push_back(newstate);
+		}
+	}
+
+	return true;
+}
+
+bool XBAnnotation::ConstuctStateMap()
+{
+	int length = (int)states.size();
+	for (int i = 0; i < length; i++)
+	{
+		if (states[i] != NULL)
+		{
+			ACTION_TYPE type = states[i]->action;
+			if (StateMap.find(type) != StateMap.end())
+			{
+				StateMap[type].push_back(i);
+			}
+			else
+			{
+				vector<int> tmp;
+				StateMap[type] = tmp;
+				StateMap[type].push_back(i);
+			}
+		}
+	}
+
 	return true;
 }

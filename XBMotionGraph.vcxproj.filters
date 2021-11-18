@@ -16,36 +16,27 @@
     <Filter Include="Source Files\JsonCpp">
       <UniqueIdentifier>{44cc9122-506e-479e-a0e8-7da9387aadf9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Algorithm">
+      <UniqueIdentifier>{3cbd8673-f74a-4b5c-a429-1deea3e5f44b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Algorithm">
+      <UniqueIdentifier>{f25c3470-aa17-4de5-bb43-a59617fc2bd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graph">
+      <UniqueIdentifier>{d5514038-0591-4e92-9267-74dd13ab91f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graph">
+      <UniqueIdentifier>{4ccb34d8-69ec-4ef7-be95-a328816ead63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FileProcess">
+      <UniqueIdentifier>{796a3c29-a7dc-4566-9721-f6991ceeb9b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FIleProcess">
+      <UniqueIdentifier>{f9f8a694-5697-4436-b51a-1ab786a7d376}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Edge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Graph.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Vertex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\BVHLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Pose.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Annotation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Transition.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Skeleton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="jsoncpp-src-0.5.0\src\lib_json\json_reader.cpp">
@@ -57,49 +48,85 @@
     <ClCompile Include="jsoncpp-src-0.5.0\src\lib_json\json_writer.cpp">
       <Filter>Source Files\JsonCpp</Filter>
     </ClCompile>
-    <ClCompile Include="source\Node.cpp">
+    <ClCompile Include="source\TypeDefinition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\Cost.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Edge.cpp">
+      <Filter>Source Files\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graph.cpp">
+      <Filter>Source Files\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Node.cpp">
+      <Filter>Source Files\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Transition.cpp">
+      <Filter>Source Files\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Prediction.cpp">
+      <Filter>Source Files\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Animation.cpp">
+      <Filter>Source Files\FileProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Annotation.cpp">
+      <Filter>Source Files\FileProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BVHLoader.cpp">
+      <Filter>Source Files\FileProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Pose.cpp">
+      <Filter>Source Files\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Skeleton.cpp">
+      <Filter>Source Files\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Vertex.cpp">
+      <Filter>Source Files\Graph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Edge.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Graph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Vertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Include\TypeDefinition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Cost.h">
+      <Filter>Header Files\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Edge.h">
+      <Filter>Header Files\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Graph.h">
+      <Filter>Header Files\Graph</Filter>
+    </ClInclude>
     <ClInclude Include="Include\Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Pose.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\BVHLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Annotation.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graph</Filter>
     </ClInclude>
     <ClInclude Include="Include\Transition.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Prediction.h">
+      <Filter>Header Files\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Animation.h">
+      <Filter>Header Files\FIleProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Annotation.h">
+      <Filter>Header Files\FIleProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\BVHLoader.h">
+      <Filter>Header Files\FIleProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Pose.h">
+      <Filter>Header Files\Graph</Filter>
     </ClInclude>
     <ClInclude Include="Include\Skeleton.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graph</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Cost.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Include\Vertex.h">
+      <Filter>Header Files\Graph</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

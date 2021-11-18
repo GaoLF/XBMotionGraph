@@ -18,10 +18,16 @@ public:
 		return Ani;
 	}
 
-	XBPose* GetFirstPose()
+	void AddPose(XBPose* pose)
 	{
-		return FirstPose;
+		if (pose)
+			Ani.push_back(pose);
 	}
+
+	//XBPose* GetFirstPose()
+	//{
+	//	return FirstPose;
+	//}
 
 	int GetFrameNum()
 	{
@@ -43,6 +49,8 @@ public:
 		FrameTime = value;
 	}
 
+	void DownSample(float targetFPS = FPS);
+
 	//Private Function
 
 
@@ -56,7 +64,7 @@ private:
 
 	vector<XBPose*> Ani;
 
-	XBPose* FirstPose;
+	//XBPose* FirstPose;
 
 };
 

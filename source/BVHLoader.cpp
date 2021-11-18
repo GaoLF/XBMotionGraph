@@ -22,17 +22,17 @@ bool XBBVNProcessor::LoadBVHFile(string name, XBAnimation* Ani, XBAnnotation* An
 
 	if (!Ani)
 	{
-		cout << "Animation not init" << endl;
+		cout << "Animation no initialized" << endl;
 		return false;
 	}
 
 	if (!Ann)
 	{
-		cout << "Annotation not init!" << endl;
+		cout << "Annotation no initialized!" << endl;
 	}
 
 	vector<XBPose*>& animation = Ani->GetAni();
-	XBPose* FirstPose = Ani->GetFirstPose();
+	//XBPose* FirstPose = Ani->GetFirstPose();
 
 	bool bFirstPose = true;
 	char c[10000];
@@ -77,8 +77,8 @@ bool XBBVNProcessor::LoadBVHFile(string name, XBAnimation* Ani, XBAnnotation* An
 
 				ParaseNumberwithChannel(floatnums, tmp_flag_arr, loc, rot);
 				Channels.push_back(tmp_flag_arr);
-				Ani->GetFirstPose()->AddLocation(loc);
-				Ani->GetFirstPose()->AddRotation(rot);
+				//Ani->GetFirstPose()->AddLocation(loc);
+				//Ani->GetFirstPose()->AddRotation(rot);
 			}
 
 			if (tmp.find("OFFSET") != -1)
@@ -198,7 +198,7 @@ bool XBBVNProcessor::ExportBVHFile(string name, XBAnimation* Ani)
 	OutStrs += ("Frame Time: " + to_string(Ani->GetFrameTime()) + "\n");
 
 	vector<XBPose*> Poses = Ani->GetAni();
-	for (size_t i = 0; i < Ani->GetFrameNum(); i++)
+	for (int i = 0; i < Ani->GetFrameNum(); i++)
 	{
 		XBPose* Pose = Poses[i];
 
@@ -210,7 +210,7 @@ bool XBBVNProcessor::ExportBVHFile(string name, XBAnimation* Ani)
 		}
 
 
-		size_t length = Pose->GetLocations().size();
+		int length = (int)Pose->GetLocations().size();
 
 		for (int j = 0; j < length; j++)
 		{
@@ -265,16 +265,3 @@ bool XBBVNProcessor::ParaseNumberwithChannel(vector<float>& nums, vector<CHANNEL
 	return true;
 }
 
-void split(const string& s, vector<string>& tokens, const string& delimiters)
-{
-	string::size_type lastPos = s.find_first_not_of(delimiters, 0);
-
-	string::size_type pos = s.find_first_of(delimiters, lastPos);
-
-	while (string::npos != pos || string::npos != lastPos) {
-		tokens.push_back(s.substr(lastPos, pos - lastPos));//use emplace_back after C++11 
-		lastPos = s.find_first_not_of(delimiters, pos);
-		pos = s.find_first_of(delimiters, lastPos);
-	}
-
-}

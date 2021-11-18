@@ -28,9 +28,20 @@ public:
 		return Dst;
 	}
 
+	float GetDist()
+	{
+		return Dist;
+	}
+
+	void SetDist(float value)
+	{
+		Dist = value;
+	}
+
 private:
 
 	XBNode* Src;
 	XBNode* Dst;
+	float Dist;
 };
 #endif // _EDGE_H

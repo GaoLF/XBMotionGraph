@@ -46,6 +46,16 @@ public:
 
 	void PrintPose();
 
+	ACTION_TYPE GetFlag()
+	{
+		return Flag;
+	}
+
+	void SetFlag(ACTION_TYPE value)
+	{
+		Flag = value;
+	}
+
 
 	//Local Function
 
@@ -54,7 +64,7 @@ public:
 	//Local Variable
 private:
 	string Name;
-	int Flag;
+	ACTION_TYPE Flag;
 
 	vector<Eigen::Vector3f> Rotations;
 	vector<Eigen::Vector3f> Locations;
