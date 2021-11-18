@@ -15,7 +15,7 @@ public:
 	//Primary Function
 	XBPose()
 	{
-
+		Index = 0;
 	};
 
 	~XBPose()
@@ -56,6 +56,16 @@ public:
 		Flag = value;
 	}
 
+	void SetIndex(int value)
+	{
+		Index = index;
+	}
+
+	int GetIndex()
+	{
+		return Index;
+	}
+
 
 	//Local Function
 
@@ -69,7 +79,7 @@ private:
 	vector<Eigen::Vector3f> Rotations;
 	vector<Eigen::Vector3f> Locations;
 
-	
+	int Index;
 
 };
 

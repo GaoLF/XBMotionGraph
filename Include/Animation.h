@@ -24,6 +24,11 @@ public:
 			Ani.push_back(pose);
 	}
 
+	XBPose* GetPose(int index)
+	{
+		return Ani[index];
+	}
+
 	//XBPose* GetFirstPose()
 	//{
 	//	return FirstPose;

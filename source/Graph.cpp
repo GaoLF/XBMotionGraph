@@ -394,16 +394,60 @@ bool XBGraph::TraverseHandleFirstFrame(XBAnimation* ani, XBAnnotation* ann, int 
 
 bool XBGraph::TraverseHandleRestFrame(XBAnimation* ani, XBAnnotation* ann)
 {
-	if (ani == NULL || ann == NULL || curframe < 1 || curframe >= (int)Nodes.size())
+	int curframe = 1;
+	if (ani == NULL || ann == NULL|| curframe >= (int)Nodes.size())
 		return false;
 
 	if (Nodes.size() < 1)
 		return false;
 	
-	ACTION_TYPE tmp_type = Nodes[0]->GetPose()->GetFlag();
+	XBPose* lastPose = ani->GetPose(0);
+	if (lastPose == nullptr)
+	{
+		return false;
+	}
+
+	ACTION_TYPE lastType = lastPose->GetFlag();
+	int tmp_index = 0;
+	
 
 	while (curframe > 1 || curframe < (int)Nodes.size())
 	{
+		float curtime = (float)curframe / (float(FPS));
+		bool bTran = true;
+		ACTION_TYPE curType = ACTION_TYPE::IDLE;
+		
+		//the states have not sorted. so must loop all
+		for (int i = 0; i < (int)ann->GetStates()->size(); i++)
+		{
+			if (curtime < ann->GetState(i)->end && curtime > ann->GetState(i)->start)
+			{
+				bTran = false;
+				curType = ann->GetState(i)->action;
+				break;
+			}
+		}
+
+		if (bTran == false)
+		{
+			if (curType == lastType)
+			{
+				int lastIndex = lastPose->GetIndex();
+				if (lastIndex + 1 < (int)Nodes.size())
+				{
+					if (Nodes[lastIndex + 1]->GetPose()->GetFlag() == curType);
+					{
+						ani->AddPose(Nodes[lastIndex + 1]->GetPose());
+					}
+				}
+			}
+			else
+			{
+				lastType = curType;
+			}
+		}
+
+		
 		
 	}
 
