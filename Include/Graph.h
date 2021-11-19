@@ -6,6 +6,14 @@
 #include "Animation.h"
 #include "Annotation.h"
 
+//图的构造和生成需要一个ann和ani
+//用图生成一个新的动画，需要另一个ann
+
+//我把每一个部分叫做Section
+//Section有两种，Key Section和Transition Section
+
+//后续的选取section算法中会考虑到section的长度和实际state的长度关联
+
 class XBGraph
 {
 public:
@@ -18,7 +26,7 @@ public:
 	//Public Function
 	bool Construction(XBAnimation* ani, XBAnnotation* ann);
 
-	XBAnimation* Traverse(XBAnnotation* ann, int firstframeindex = 0);
+	XBAnimation* Traverse(XBAnnotation* tryann);
 
 	//Print the Nodes and Edges
 	void PrintMotionGraph();
@@ -43,14 +51,19 @@ public:
 	
 	
 	//Local Function
-	int RandomSelectFirstFrame(ACTION_TYPE type, XBAnnotation* ann);
-	
-	bool TraverseHandleFirstFrame(XBAnimation* ani, XBAnnotation* ann, int firstframeindex = 0);
+	int RandomSelectKeySectionIndexInGraph(ACTION_TYPE type);
 
-	//性能考虑，不用递归了
-	//这个方法其实用递归会容易很多
-	//默认从index=1帧开始
-	bool TraverseHandleRestFrame(XBAnimation* ani, XBAnnotation* ann);
+	//两种设置关键Section的方法
+	//选取第一个符合要求的Section，也是我在做demo中需要的
+	//另一个是随机的选取
+	bool TraverseHandleKeySection(XBAnimation* RetAni, XBAnnotation* ann);
+
+	//L = tran C = tran
+	//L = tran C = KeyA
+	//L = KeyA C = KeyA
+	//L = KeyA C = tran
+	//L = KeyA C = KeyB
+	bool TraverseHandleRestSection(XBAnimation* ani, XBAnnotation* ann);
 	
 
 	//Public Variable
@@ -59,12 +72,11 @@ public:
 
 private:
 
-	XBNode* Head;
-
 	vector<XBNode*> Nodes;
 	vector<XBEdge*> Edges;
 
-
+	XBAnimation* Animation;
+	XBAnnotation* Annotation;
 };
 
 #endif // _GRAPH_H

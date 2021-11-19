@@ -58,7 +58,7 @@ public:
 
 	void SetIndex(int value)
 	{
-		Index = index;
+		Index = value;
 	}
 
 	int GetIndex()

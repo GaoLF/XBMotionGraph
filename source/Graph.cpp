@@ -11,12 +11,11 @@ using namespace std;
 
 XBGraph::XBGraph()
 {
-	Head = new XBNode();
+	
 };
 
 XBGraph::~XBGraph()
 {
-	delete Head;
 	for (int i = 0; i < (int)Nodes.size(); i++)
 	{
 		delete Nodes[i];
@@ -32,6 +31,9 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 	
 	if (ani == NULL)
 		return false; 
+
+	Animation = ani;
+	Annotation = ann;
 
 	vector<XBPose*> poses = ani->GetAni();
 	int NodeNum = poses.size();
@@ -98,27 +100,24 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 }
 
 
-XBAnimation* XBGraph::Traverse(XBAnnotation* ann, int firstframeindex)
+XBAnimation* XBGraph::Traverse(XBAnnotation* tryann)
 {
-	if (ann == NULL)
+	if (tryann == NULL)
 		return NULL;
 
 	XBAnimation* NewAni = new XBAnimation();
 
-	if (TraverseHandleFirstFrame(NewAni, ann, firstframeindex) == NULL)
+	if (TraverseHandleKeySection(NewAni, tryann) == NULL)
 	{
-		cerr << "Failed to Construct the First Pose of the Animation by Traversing the graph!" << endl;
+		cerr << "Failed to Construct the Key Section of the Animation by Traversing the graph!" << endl;
 		return NULL;
 	}
 
-	int startframe = 1;
-
-	if (TraverseHandleRestFrame(NewAni, ann, startframe) == false)
+	if (TraverseHandleRestSection(NewAni, tryann) == false)
 	{
 		cerr << "Failed to Construct the rest frames of the Animation by Traversing the graph!" << endl;
 		return NULL;
 	}
-
 
 	return NewAni;
 }
@@ -333,125 +332,38 @@ bool XBGraph::LoadMotionGraphData(string file)
 		
 }
 
-int XBGraph::RandomSelectFirstFrame(ACTION_TYPE type, XBAnnotation* ann)
+int XBGraph::RandomSelectKeySectionIndexInGraph(ACTION_TYPE type)
 {
-	vector<int> tmp_arr = ann->FindArrayofType(type);
+	srand(time(NULL));
+	
+	int num = Annotation->FindArrayofType(type).size();
 
-	int rand_index = GetRandomNum(0, (int)tmp_arr.size());
+	int index = rand() % (num);
 
-	//Nodes->push_back();
-
-	return 0;
+	return index;
 }
 
-bool XBGraph::TraverseHandleFirstFrame(XBAnimation* ani, XBAnnotation* ann, int firstframeindex)
+bool XBGraph::TraverseHandleKeySection(XBAnimation* RetAni, XBAnnotation* tryann)
 {
-	XBKeyState* firstState = ann->GetState(0);
-	ACTION_TYPE first_type = ACTION_TYPE::IDLE;
-	int actual_firstframeindex = 0;
-
-	if (firstState)
+	if (RetAni == NULL)
 	{
-		if (firstState->start < 0.00001f && firstState->start > 0.00001)
+		return false;
+	}
+
+	for (int i = 0; i < (int)tryann->GetStates().size(); i++)
+	{
+		XBKeyState* state = tryann->GetState(i);
+		if (state != NULL)
 		{
-			first_type = firstState->action;
-		}
-	}
+			ACTION_TYPE type = tryann->GetState(i)->action;
+#if SECTION_RANDOMACESS
 
-#if FIRST_FRAME_RANDOMACESS
 
-	actual_firstframeindex = RandomSelectFirstFrame(first_type, Nodes.size());
-
-#elif FIRST_FRAME_ASSIGNED
-
-	actual_firstframeindex = firstframeindex;
-
-	//XBPose* firstnode;
-	if (firstframeindex < 0 || firstframeindex > (int)Nodes.size())
-	{
-		actual_firstframeindex = RandomSelectFirstFrame(first_type, ann);
-	}
-	if (firstframeindex < (int)Nodes.size() && Nodes[firstframeindex]->GetPose())
-	{
-		if (Nodes[firstframeindex]->GetPose()->GetFlag() != first_type)
-		{
-			actual_firstframeindex = RandomSelectFirstFrame(first_type, ann);
-		}
-	}
+#elif SECTION_ASSIGNED
 
 #endif
 
-	if (actual_firstframeindex < (int)Nodes.size() && Nodes[actual_firstframeindex]->GetPose())
-	{
-		ani->AddPose(Nodes[actual_firstframeindex]->GetPose());
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-bool XBGraph::TraverseHandleRestFrame(XBAnimation* ani, XBAnnotation* ann)
-{
-	int curframe = 1;
-	if (ani == NULL || ann == NULL|| curframe >= (int)Nodes.size())
-		return false;
-
-	if (Nodes.size() < 1)
-		return false;
-	
-	XBPose* lastPose = ani->GetPose(0);
-	if (lastPose == nullptr)
-	{
-		return false;
-	}
-
-	ACTION_TYPE lastType = lastPose->GetFlag();
-	int tmp_index = 0;
-	
-
-	while (curframe > 1 || curframe < (int)Nodes.size())
-	{
-		float curtime = (float)curframe / (float(FPS));
-		bool bTran = true;
-		ACTION_TYPE curType = ACTION_TYPE::IDLE;
-		
-		//the states have not sorted. so must loop all
-		for (int i = 0; i < (int)ann->GetStates()->size(); i++)
-		{
-			if (curtime < ann->GetState(i)->end && curtime > ann->GetState(i)->start)
-			{
-				bTran = false;
-				curType = ann->GetState(i)->action;
-				break;
-			}
 		}
-
-		if (bTran == false)
-		{
-			if (curType == lastType)
-			{
-				int lastIndex = lastPose->GetIndex();
-				if (lastIndex + 1 < (int)Nodes.size())
-				{
-					if (Nodes[lastIndex + 1]->GetPose()->GetFlag() == curType);
-					{
-						ani->AddPose(Nodes[lastIndex + 1]->GetPose());
-					}
-				}
-			}
-			else
-			{
-				lastType = curType;
-			}
-		}
-
-		
-		
 	}
-
-	XBNode* tmp_node = Nodes[curframe];
 	
-	return true;
 }

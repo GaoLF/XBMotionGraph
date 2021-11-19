@@ -13,7 +13,7 @@ void XBPose::PrintPose()
 
 	cout << "There are " << Locations.size() << " Joints:" << endl;
 
-	for (int i = 0; i < Locations.size(); i++)
+	for (int i = 0; i < (int)Locations.size(); i++)
 	{
 		cout << i << ": ";
 		for (int j = 0; j < 3; j++)

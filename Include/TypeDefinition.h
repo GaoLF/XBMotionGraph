@@ -13,8 +13,8 @@
 #define THRESHOLD_K (int(3))
 
 //two First Frame selection Methods
-#define FIRST_FRAME_RANDOMACESS 0
-#define FIRST_FRAME_ASSIGNED 1
+#define SECTION_RANDOMACESS 0
+#define SECTION_ASSIGNED 1
 
 #define INTERVAL_2_IDLE (10.f)
 
