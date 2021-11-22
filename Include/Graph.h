@@ -53,18 +53,20 @@ public:
 	//Local Function
 	int RandomSelectKeySectionIndexInGraph(ACTION_TYPE type);
 
+	XBKeyState* RandomSelectKeyStateInGraph(ACTION_TYPE type);
+
 	//两种设置关键Section的方法
 	//选取第一个符合要求的Section，也是我在做demo中需要的
 	//另一个是随机的选取
 	bool TraverseHandleKeySection(XBAnimation* RetAni, XBAnnotation* ann);
 
-	//L = tran C = tran
-	//L = tran C = KeyA
-	//L = KeyA C = KeyA
-	//L = KeyA C = tran
-	//L = KeyA C = KeyB
+	//Handle the all the Trans
 	bool TraverseHandleRestSection(XBAnimation* ani, XBAnnotation* ann);
 	
+	//Handle One Tran 
+	//我曾想把start node和end node存到tran里，但是annotation需要反向耦合graph，有问题
+	//还是把trans存到graph
+	bool HandleTran(XBTransition* tran);
 
 	//Public Variable
 
@@ -77,6 +79,9 @@ private:
 
 	XBAnimation* Animation;
 	XBAnnotation* Annotation;
+
+	//为了输出而设置的
+	vector<XBTransition*> Trans;
 };
 
 #endif // _GRAPH_H

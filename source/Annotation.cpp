@@ -4,6 +4,8 @@
 #include "json/reader.h"
 #include <string>
 #include <cassert>
+#include "Transition.h"
+#include "Graph.h"
 using namespace std;
 
 XBKeyState::XBKeyState()
@@ -26,6 +28,42 @@ XBAnnotation::XBAnnotation()
 }
 
 bool XBAnnotation::LoadJson(string filename)
+{
+	if (ParseJson(filename) == false)
+	{
+		cerr << "Failed to Parse Json!" << endl;
+		return false;
+	}
+
+	if (AddIdleState() == false)
+	{
+		cerr << "Failed to Add Idle State!" << endl;
+		return false;
+	}
+
+	if (ConstuctStateMap() == false)
+	{
+		cerr << "Failed to Construct State Map!" << endl;
+		return false;
+	}
+
+	if (SortStates() == false)
+	{
+		cerr << "Failed to Sort State!" << endl;
+		return false;
+	}
+
+	if (ConstuctTrans() == false)
+	{
+		cerr << "Failed to Construct Trans" << endl;
+		return false;
+	}
+
+	cout << "Succeed to Load Json: " << filename << endl;
+	return true;
+}
+
+bool XBAnnotation::ParseJson(string filename)
 {
 	ifstream ifs;
 	ifs.open(filename);
@@ -106,6 +144,7 @@ bool XBAnnotation::AddIdleState()
 		}
 	}
 
+	//Supplement the last One
 	if (length > 0)
 	{
 		float tmp_end = states[length - 1]->end;
@@ -141,6 +180,54 @@ bool XBAnnotation::ConstuctStateMap()
 				vector<int> tmp;
 				StateMap[type] = tmp;
 				StateMap[type].push_back(i);
+			}
+		}
+	}
+
+	return true;
+}
+
+bool XBAnnotation::SortStates()
+{
+	if (TotalDuration < 0)
+	{
+		cerr << "Warning: The Annotation's duration is not initialized." << endl;
+	}
+
+	int length = (int)states.size();
+
+	for (int i = 0; i < length; i++)
+	{
+		for (int j = 0; j < length; j++)
+		{
+			if ((j + 1) < length && states[j]->start > states[j]->end)
+			{
+				swap(states[j], states[j + 1]);
+			}
+		}
+	}
+}
+
+bool XBAnnotation::ConstuctTrans()
+{
+	if (TotalDuration < 0)
+	{
+		cerr << "Warning: The Annotation's duration is not initialized." << endl;
+	}
+
+	int length = (int)states.size();
+
+	for (int i = 0; i < length; i++)
+	{
+		if ((i + 1) < length)
+		{
+			if (states[i]->end < states[i]->start)
+			{
+				XBTransition* newTrans = new XBTransition();
+				newTrans->SetStart(states[i]->end);
+				newTrans->SetEnd(states[i + 1]->start);
+
+				Trans.push_back(newTrans);
 			}
 		}
 	}

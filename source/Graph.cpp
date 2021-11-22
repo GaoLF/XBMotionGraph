@@ -107,7 +107,7 @@ XBAnimation* XBGraph::Traverse(XBAnnotation* tryann)
 
 	XBAnimation* NewAni = new XBAnimation();
 
-	if (TraverseHandleKeySection(NewAni, tryann) == NULL)
+	if (TraverseHandleKeySection(NewAni, tryann) == false)
 	{
 		cerr << "Failed to Construct the Key Section of the Animation by Traversing the graph!" << endl;
 		return NULL;
@@ -334,13 +334,16 @@ bool XBGraph::LoadMotionGraphData(string file)
 
 int XBGraph::RandomSelectKeySectionIndexInGraph(ACTION_TYPE type)
 {
-	srand(time(NULL));
-	
 	int num = Annotation->FindArrayofType(type).size();
 
-	int index = rand() % (num);
+	int index = GetRandomNum(num);
 
 	return index;
+}
+
+XBKeyState* XBGraph::RandomSelectKeyStateInGraph(ACTION_TYPE type)
+{
+	return Annotation->GetState(RandomSelectKeySectionIndexInGraph(type));
 }
 
 bool XBGraph::TraverseHandleKeySection(XBAnimation* RetAni, XBAnnotation* tryann)
@@ -350,20 +353,119 @@ bool XBGraph::TraverseHandleKeySection(XBAnimation* RetAni, XBAnnotation* tryann
 		return false;
 	}
 
+	float total_Duration = tryann->GetTotalDuration();
+	int total_Frame = (int)(total_Duration * FPS);
+	if ((int)RetAni->GetAni().size() < total_Frame)
+	{
+		for (int i = (int)RetAni->GetAni().size(); i < total_Frame; i++)
+		{
+			XBPose* newPose = new XBPose();
+			RetAni->AddPose(newPose);
+		}
+	}
+
 	for (int i = 0; i < (int)tryann->GetStates().size(); i++)
 	{
-		XBKeyState* state = tryann->GetState(i);
-		if (state != NULL)
+		XBKeyState* try_state = tryann->GetState(i);
+		if (try_state != NULL)
 		{
 			ACTION_TYPE type = tryann->GetState(i)->action;
 #if SECTION_RANDOMACESS
 
+			XBKeyState* state = RandomSelectKeyStateInGraph(type);
+			
+			if (state == nullptr)
+				continue;
+
+			float start = state->start;
+			float end = state->end;
+			int start_frame = int(start * FPS);
+			int end_frame = int(end * FPS);
+			int max_section_size = (int)((try_state->end - try_state->start) * FPS);
+			int begin_frame = (int)(try_state->start * FPS);
+
+			for (int j = start_frame; j < end_frame; j++)
+			{
+				if (j < (int)Animation->GetAni().size())
+				{
+					int cur_section_size = j - start_frame;
+					
+					if (cur_section_size < max_section_size)
+					{
+						Animation->GetAni()[begin_frame + cur_section_size] = Nodes[j]->GetPose();
+					}
+				}
+			}
 
 #elif SECTION_ASSIGNED
 
 #endif
-
 		}
 	}
+
+	return true;
 	
+}
+
+bool XBGraph::TraverseHandleRestSection(XBAnimation* RetAni, XBAnnotation* tryann)
+{
+	int count = Annotation->GetTransNum();
+	for (int i = 0; i < count; i++)
+	{
+		XBTransition* tmp_Tran = Annotation->GetTrans()[i];
+
+		if (HandleTran(tmp_Tran) == false)
+		{
+			cerr << "Failed to Traverse Tran:" << i << endl;
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool XBGraph::HandleTran(XBTransition* tran)
+{
+	if (tran == nullptr)
+		return false;
+	if (Animation == NULL)
+		return false;
+
+	int TotalFrame = Animation->GetFrameNum();
+	if (TotalFrame != Animation->GetAni().size())
+		return false;
+
+	float start = tran->GetStart();
+	float end = tran->GetEnd();
+	int start_frame = (int)(start * FPS) + 1;
+	int end_frame = (int)(end * FPS) - 1;
+
+	int start_refer_frame = start_frame - 1;
+	int end_refer_frame = end_frame + 1;
+
+	if (start_refer_frame < 0 || start_frame < 0 || end_frame > TotalFrame || end_refer_frame > TotalFrame)
+	{
+		return false;
+	}
+
+	if (Animation->GetPose(start_refer_frame)->GetIndex() >= (int)Nodes.size() ||
+		Animation->GetPose(end_refer_frame)->GetIndex() >= (int)Nodes.size())
+		return false;
+
+	XBNode* start_refer_Node = Nodes[Animation->GetPose(start_refer_frame)->GetIndex()];
+	XBNode* end_refer_Node = Nodes[Animation->GetPose(end_refer_frame)->GetIndex()];;
+
+	if (start_refer_Node || !end_refer_Node)
+		return false;
+
+	int num_frame = end_frame - start_frame + 1;
+	XBNode* tmp_Node = start_refer_Node;
+
+	for (int i = 0; i < num_frame; i++)
+	{
+
+		for(int NodeIndex = 0; NodeIndex < SAVED)
+	}
+
+
 }

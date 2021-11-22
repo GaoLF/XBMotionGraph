@@ -26,3 +26,8 @@ int GetRandomNum(int minv, int maxv)
 
 	return value;
 }
+
+int GetRandomNum(int maxv)
+{
+	return GetRandomNum(0, maxv);
+}

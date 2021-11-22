@@ -13,13 +13,16 @@
 #define THRESHOLD_K (int(3))
 
 //two First Frame selection Methods
-#define SECTION_RANDOMACESS 0
-#define SECTION_ASSIGNED 1
+#define SECTION_RANDOMACESS 1
+#define SECTION_ASSIGNED 0
 
 #define INTERVAL_2_IDLE (10.f)
 
 #define FPS (30.0)
 #define TIME_INTERVAL (1.f / 30.f)
+
+//The Parameter saved in the Yang(2020) Paper
+#define SAVED (100)
 
 
 enum EMOTION_TYPE
@@ -49,5 +52,6 @@ void split(const std::string& s, std::vector<std::string>& tokens, const std::st
 
 int GetRandomNum(int minv, int maxv);
 
+int GetRandomNum(int maxv);
 
 #endif//_TYPEDEFINITION_H
