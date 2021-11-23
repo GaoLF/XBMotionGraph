@@ -99,7 +99,7 @@ private:
 	//key is action type, while value is state index 
 	std::map<ACTION_TYPE, std::vector<int>> StateMap;
 
-	std::vector<XBTransition*> Trans;
+	//std::vector<XBTransition*> Trans;
 };
 
 #endif // _ANIMATION_H

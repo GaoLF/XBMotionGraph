@@ -463,9 +463,39 @@ bool XBGraph::HandleTran(XBTransition* tran)
 
 	for (int i = 0; i < num_frame; i++)
 	{
-
-		for(int NodeIndex = 0; NodeIndex < SAVED)
+		for (int NodeIndex = 0; NodeIndex < SAVED; NodeIndex++)
+		{
+			//if()
+		}
 	}
 
 
+}
+
+
+bool XBAnnotation::ConstuctTrans()
+{
+	if (TotalDuration < 0)
+	{
+		cerr << "Warning: The Annotation's duration is not initialized." << endl;
+	}
+
+	int length = (int)states.size();
+
+	for (int i = 0; i < length; i++)
+	{
+		if ((i + 1) < length)
+		{
+			if (states[i]->end < states[i]->start)
+			{
+				XBTransition* newTrans = new XBTransition();
+				newTrans->SetStart(states[i]->end);
+				newTrans->SetEnd(states[i + 1]->start);
+
+				Trans.push_back(newTrans);
+			}
+		}
+	}
+
+	return true;
 }
