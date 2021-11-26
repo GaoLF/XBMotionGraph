@@ -12,7 +12,8 @@ using namespace std;
 
 XBGraph::XBGraph()
 {
-	
+	Animation = new XBAnimation();
+	Annotation = new XBAnnotation();
 };
 
 XBGraph::~XBGraph()
@@ -25,6 +26,9 @@ XBGraph::~XBGraph()
 	{
 		delete Edges[i];
 	}
+
+	delete Animation;
+	delete Annotation;
 };
 
 bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
@@ -112,6 +116,7 @@ XBAnimation* XBGraph::Traverse(XBAnnotation* tryann)
 
 	XBAnimation* NewAni = new XBAnimation();
 
+#if TEST_METHOD_1
 	if (TraverseHandleKeySection(NewAni, tryann) == false)
 	{
 		cerr << "Failed to Construct the Key Section of the Animation by Traversing the graph!" << endl;
@@ -123,6 +128,20 @@ XBAnimation* XBGraph::Traverse(XBAnnotation* tryann)
 		cerr << "Failed to Construct the rest frames of the Animation by Traversing the graph!" << endl;
 		return NULL;
 	}
+#endif
+
+#if TEST_METHOD_2
+	if (TraverseHandleMotions(NewAni, tryann) == false)
+	{
+		cerr << "Failed to Construct the Motions of the Animation by Traversing the graph!" << endl;
+		return NULL;
+	}
+
+#endif
+
+#if TEST_METHOD_2
+
+#endif
 
 	return NewAni;
 }
@@ -489,7 +508,6 @@ bool XBGraph::HandleTran(XBTransition* tran)
 	return true;
 }
 
-
 bool XBGraph::ConstructTrans(XBAnnotation* tryann)
 {
 	int length = (int)tryann->GetStates().size();
@@ -534,7 +552,7 @@ bool XBGraph::SetMotionState()
 		{
 			for (int i = startframe; i < endframe; i++)
 			{
-				if (i < Nodes.size())
+				if (i < (int)Nodes.size())
 				{
 					newmotion->peak.push_back(Nodes[i]);
 					Nodes[i]->SetState(ACTION_STATE::None);
@@ -579,6 +597,8 @@ bool XBGraph::SetMotionState()
 
 		motions.push_back(newmotion);
 	}
+
+	return true;
 }
 
 bool XBGraph::ConstructMotions()
@@ -677,4 +697,119 @@ bool XBGraph::ConstructMotions()
 	return true;
 }
 
+bool XBGraph::TraverseHandleMotions(XBAnimation* NewAni, XBAnnotation* tryann)
+{
+	if (NewAni == nullptr || tryann == nullptr)
+		return false;
+
+	for (int AnnStateIndex = 0; AnnStateIndex < (int)tryann->GetStates().size(); AnnStateIndex++)
+	{
+		XBKeyState* curState = Annotation->GetState(AnnStateIndex);
+		
+
+		if (!curState)
+		{
+			cerr << "Error:some state is Null!" << endl;
+			return false;
+		}
+
+		if (AnnStateIndex == 0)
+		{
+			if (ConstructAniByFirstState(NewAni, curState) == false)
+			{
+				return false;
+			}
+		}
+		else
+		{
+			XBKeyState* lastState = Annotation->GetState(AnnStateIndex - 1);
+			if (lastState == nullptr)
+			{
+				cerr << "Failed to Get the Last State!" << endl;
+				return false;
+			}
+
+			if (ConstructAniByTwoStates(NewAni, curState, lastState) == false)
+			{
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+bool XBGraph::ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState)
+{
+	if (NewAni == nullptr)
+	{
+		return false;
+	}
+
+	//以后再处理第一个state是idle的问题
+	if (curState->action == ACTION_TYPE::NONE || curState->action == ACTION_TYPE::IDLE)
+	{
+		cerr << "The First State can not be none or idle~" << endl;
+	}
+
+	vector<int> stateindexes = Annotation->FindArrayofType(curState->action);
+
+	float min_total_time_error = 10000.f;
+	int min_error_index = -1;
+	for (int i = 0; i < (int)stateindexes.size(); i++)
+	{
+		float time_state_existed = Annotation->GetState(stateindexes[i])->end - Annotation->GetState(stateindexes[i])->start;
+		float time_state_try = curState->end - curState->start;
+
+		if (abs(time_state_try - time_state_existed) < min_total_time_error)
+		{
+			min_total_time_error = abs(time_state_try - time_state_existed);
+			min_error_index = i;
+		}
+	}
+
+	if (min_error_index < 0 || min_error_index >(int)stateindexes.size())
+	{
+		return false;
+	}
+
+	XBKeyState* min_error_state = Annotation->GetState(min_error_index);
+	int framenum = (int)((min_error_state->end - min_error_state->start) * (float)FPS);
+	
+	//this condition decision is needless, but in order to make debug easy, don't delete it
+	if ((int)NewAni->GetAni().size() <= framenum)
+	{
+		for (int i = (int)NewAni->GetAni().size(); i < framenum; i++)
+		{
+			NewAni->GetAni().push_back(new XBPose());
+		}
+	}
+	
+	for (int i = 0; i < framenum; i++)
+	{
+		int cur_frame_index = (int)(min_error_state->start * float(FPS)) + i;
+		
+		NewAni->GetAni()[i] = Nodes[cur_frame_index]->GetPose();
+
+	}
+
+	return true;
+}
+
+bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState)
+{
+	if (NewAni == NULL || curState == NULL || lastState == NULL)
+	{
+		cerr << "Wrong Point!" << endl;
+	}
+
+	//key -> key
+
+	//key -> idle
+
+	//idle -> idle
+
+
+	return true;
+}
 #endif 

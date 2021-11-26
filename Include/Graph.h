@@ -80,6 +80,15 @@ public:
 #if TEST_METHOD_2
 	bool ConstructMotions();
 
+	bool TraverseHandleMotions(XBAnimation* NewAni, XBAnnotation* tryann);
+	bool ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState);
+
+	//many situations
+	//cur: keystate -> last: keystate
+	//cur: keystate -> last: idle
+	//cur: idle -> last: keystate
+	//Do not exist: cur: idle -> last: idle
+	bool ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState);
 #endif
 
 	bool SetMotionState();
