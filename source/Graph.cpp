@@ -796,7 +796,7 @@ bool XBGraph::ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState
 	return true;
 }
 
-bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState)
+bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, int startindex, XBKeyState* curState, XBKeyState* lastState)
 {
 	if (NewAni == NULL || curState == NULL || lastState == NULL)
 	{

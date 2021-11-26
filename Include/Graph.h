@@ -81,6 +81,9 @@ public:
 	bool ConstructMotions();
 
 	bool TraverseHandleMotions(XBAnimation* NewAni, XBAnnotation* tryann);
+
+	//以后再处理第一个state是idle的问题
+	//不然的话，也要分好多种情况
 	bool ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState);
 
 	//many situations
@@ -88,7 +91,7 @@ public:
 	//cur: keystate -> last: idle
 	//cur: idle -> last: keystate
 	//Do not exist: cur: idle -> last: idle
-	bool ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState);
+	bool ConstructAniByTwoStates(XBAnimation* NewAni, int startindex, XBKeyState* curState, XBKeyState* lastState);
 #endif
 
 	bool SetMotionState();
