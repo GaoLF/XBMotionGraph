@@ -46,16 +46,6 @@ public:
 
 	void PrintPose();
 
-	ACTION_TYPE GetFlag()
-	{
-		return Flag;
-	}
-
-	void SetFlag(ACTION_TYPE value)
-	{
-		Flag = value;
-	}
-
 	void SetIndex(int value)
 	{
 		Index = value;
@@ -74,13 +64,11 @@ public:
 	//Local Variable
 private:
 	string Name;
-	ACTION_TYPE Flag;
 
 	vector<Eigen::Vector3f> Rotations;
 	vector<Eigen::Vector3f> Locations;
 
 	int Index;
-
 };
 
 #endif//_POSE_H

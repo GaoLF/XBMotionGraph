@@ -63,15 +63,7 @@ public:
 		return TotalDuration;
 	}
 
-	vector<XBTransition*>& GetTrans()
-	{
-		return Trans;
-	}
 
-	int GetTransNum()
-	{
-		return (int)Trans.size();
-	}
 
 	bool LoadJson(std::string filename);
 
@@ -81,8 +73,6 @@ public:
 	bool AddIdleState();
 
 	bool ConstuctStateMap();
-
-	bool ConstuctTrans();
 
 	bool SortStates();
 

@@ -87,6 +87,9 @@
     <ClCompile Include="source\Vertex.cpp">
       <Filter>Source Files\Graph</Filter>
     </ClCompile>
+    <ClCompile Include="source\Motion.cpp">
+      <Filter>Source Files\Graph</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\TypeDefinition.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files\Graph</Filter>
     </ClInclude>
     <ClInclude Include="Include\Vertex.h">
+      <Filter>Header Files\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Motion.h">
       <Filter>Header Files\Graph</Filter>
     </ClInclude>
   </ItemGroup>

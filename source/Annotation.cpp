@@ -53,12 +53,6 @@ bool XBAnnotation::LoadJson(string filename)
 		return false;
 	}
 
-	if (ConstuctTrans() == false)
-	{
-		cerr << "Failed to Construct Trans" << endl;
-		return false;
-	}
-
 	cout << "Succeed to Load Json: " << filename << endl;
 	return true;
 }
@@ -206,5 +200,7 @@ bool XBAnnotation::SortStates()
 			}
 		}
 	}
+
+	return true;
 }
 

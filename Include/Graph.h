@@ -6,13 +6,10 @@
 #include "Animation.h"
 #include "Annotation.h"
 
-//图的构造和生成需要一个ann和ani
-//用图生成一个新的动画，需要另一个ann
+class XBMotion;
 
-//我把每一个部分叫做Section
-//Section有两种，Key Section和Transition Section
-
-//后续的选取section算法中会考虑到section的长度和实际state的长度关联
+//图的构造和生成需要一个ann(trainann)和ani
+//用图生成一个新的动画，需要另一个ann(tryann)
 
 class XBGraph
 {
@@ -49,6 +46,16 @@ public:
 	//--------Node1.Index Node1.flag Location Rotation
 	bool SaveMotionGraphData(string file);
 	
+	vector<XBTransition*>& GetTrans()
+	{
+		return Trans;
+	}
+
+	int GetTransNum()
+	{
+		return (int)Trans.size();
+	}
+
 	
 	//Local Function
 	int RandomSelectKeySectionIndexInGraph(ACTION_TYPE type);
@@ -68,6 +75,16 @@ public:
 	//还是把trans存到graph
 	bool HandleTran(XBTransition* tran);
 
+	bool ConstructTrans(XBAnnotation* tryann);
+
+#if TEST_METHOD_2
+	bool ConstructMotions();
+
+#endif
+
+	bool SetMotionState();
+
+
 	//Public Variable
 
 	//Local Variable
@@ -82,6 +99,10 @@ private:
 
 	//为了输出而设置的
 	vector<XBTransition*> Trans;
+
+#if TEST_METHOD_2
+	vector<XBMotion*> motions;
+#endif
 };
 
 #endif // _GRAPH_H

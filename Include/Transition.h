@@ -1,7 +1,7 @@
 #ifndef _VTRANSITION_H
 #define _VTRANSITION_H
 
-
+#include "Node.h"
 using namespace std;
 
 class XBTransition

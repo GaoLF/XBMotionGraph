@@ -1,12 +1,13 @@
-#include "Graph.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
 #include <random>
 
+#include "Graph.h"
 #include "Cost.h"
 #include "TypeDefinition.h"
+#include "Motion.h"
 using namespace std;
 
 XBGraph::XBGraph()
@@ -95,6 +96,10 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 	}
 	cout << endl;
 
+#if TEST_METHOD_2
+	ConstructMotions();
+#endif
+
 	cout << "Succeed to Construct the Motion Graph!" << endl;
 	return true;
 }
@@ -170,7 +175,7 @@ bool XBGraph::SaveMotionGraphData(string file)
 
 		DataStr += to_string(Nodes[i]->GetIndex()) + " ";
 
-		DataStr += to_string((int)Nodes[i]->GetPose()->GetFlag()) + " ";
+		DataStr += to_string((int)Nodes[i]->GetType()) + " ";
 
 		for (int j = 0; j < (int)Nodes[i]->GetPose()->GetLocations().size(); j++)
 		{
@@ -295,7 +300,7 @@ bool XBGraph::LoadMotionGraphData(string file)
 
 			XBNode* tmpNode = Nodes[NodeIndex];
 			XBPose* newPose = new XBPose();
-			newPose->SetFlag((ACTION_TYPE)tmp_flag);
+			tmpNode->SetType((ACTION_TYPE)tmp_flag);
 
 			int length = (int)splitstrs.size();
 			//3: Eigen::Vector3f.xyz
@@ -409,10 +414,10 @@ bool XBGraph::TraverseHandleKeySection(XBAnimation* RetAni, XBAnnotation* tryann
 
 bool XBGraph::TraverseHandleRestSection(XBAnimation* RetAni, XBAnnotation* tryann)
 {
-	int count = Annotation->GetTransNum();
+	int count = GetTransNum();
 	for (int i = 0; i < count; i++)
 	{
-		XBTransition* tmp_Tran = Annotation->GetTrans()[i];
+		XBTransition* tmp_Tran = GetTrans()[i];
 
 		if (HandleTran(tmp_Tran) == false)
 		{
@@ -461,36 +466,43 @@ bool XBGraph::HandleTran(XBTransition* tran)
 	int num_frame = end_frame - start_frame + 1;
 	XBNode* tmp_Node = start_refer_Node;
 
+#if TEST_METHOD_1
+	vector<vector<int>> paths;
+
+
 	for (int i = 0; i < num_frame; i++)
 	{
 		for (int NodeIndex = 0; NodeIndex < SAVED; NodeIndex++)
 		{
-			//if()
+			if(NodeIndex < (int)tmp_Node->GetEdges().size())
+			{
+				XBNode* next_Node = tmp_Node->GetEdge(NodeIndex)->GetDst();
+				if (next_Node)
+				{
+
+				}
+			}
 		}
 	}
+#endif
 
-
+	return true;
 }
 
 
-bool XBAnnotation::ConstuctTrans()
+bool XBGraph::ConstructTrans(XBAnnotation* tryann)
 {
-	if (TotalDuration < 0)
-	{
-		cerr << "Warning: The Annotation's duration is not initialized." << endl;
-	}
-
-	int length = (int)states.size();
+	int length = (int)tryann->GetStates().size();
 
 	for (int i = 0; i < length; i++)
 	{
 		if ((i + 1) < length)
 		{
-			if (states[i]->end < states[i]->start)
+			if (tryann->GetState(i)->end < tryann->GetState(i + 1)->start)
 			{
 				XBTransition* newTrans = new XBTransition();
-				newTrans->SetStart(states[i]->end);
-				newTrans->SetEnd(states[i + 1]->start);
+				newTrans->SetStart(tryann->GetState(i)->end);
+				newTrans->SetEnd(tryann->GetState(i + 1)->start);
 
 				Trans.push_back(newTrans);
 			}
@@ -499,3 +511,170 @@ bool XBAnnotation::ConstuctTrans()
 
 	return true;
 }
+
+#if TEST_METHOD_2
+
+bool XBGraph::SetMotionState()
+{
+	if (!Annotation || !Animation)
+		return false;
+
+	int length = Annotation->GetStates().size();
+	for (int stateindex = 0; stateindex < length; stateindex++)
+	{
+		XBKeyState* state = Annotation->GetState(stateindex);
+
+		XBMotion* newmotion = new XBMotion();
+		newmotion->SetAnnIndex(stateindex);
+		newmotion->SetType(state->action);
+		int startframe = int(state->start * float(FPS));
+		int endframe = int(state->end * float(FPS));
+
+		if (state->action == ACTION_TYPE::IDLE)
+		{
+			for (int i = startframe; i < endframe; i++)
+			{
+				if (i < Nodes.size())
+				{
+					newmotion->peak.push_back(Nodes[i]);
+					Nodes[i]->SetState(ACTION_STATE::None);
+					Nodes[i]->SetMotionIndex(stateindex);
+				}
+			}
+		}
+		else
+		{
+			int i = 0;
+			for (; i < ACTION_START_FRAME_NUM; i++)
+			{
+				if (startframe + i < (int)Nodes.size())
+				{
+					newmotion->start.push_back(Nodes[startframe + i]);
+					Nodes[startframe + i]->SetState(ACTION_STATE::START);
+					Nodes[startframe + i]->SetMotionIndex(stateindex);
+				}
+			}
+
+			int j = 0;
+			for (; j < ACTION_END_FRAME_NUM; j++)
+			{
+				if (endframe - j < (int)Nodes.size())
+				{
+					newmotion->end.push_back(Nodes[endframe - j]);
+					Nodes[endframe - j]->SetState(ACTION_STATE::END);
+					Nodes[endframe - j]->SetMotionIndex(stateindex);
+				}
+			}
+
+			for (int m = i + startframe; m < endframe - j; m++)
+			{
+				if (m < (int)Nodes.size())
+				{
+					newmotion->peak.push_back(Nodes[m]);
+					Nodes[m]->SetState(ACTION_STATE::PEAK);
+					Nodes[m]->SetMotionIndex(stateindex);
+				}
+			}
+		}
+
+		motions.push_back(newmotion);
+	}
+}
+
+bool XBGraph::ConstructMotions()
+{
+	if (SetMotionState() == false)
+		return false;
+
+	int length = (int)Nodes.size();
+
+	//遍历所有node
+	for (int nodeindex = 0; nodeindex < length; nodeindex++)
+	{
+		//选取End State Node作为root
+		XBNode* root_node = Nodes[nodeindex];
+		if (root_node->GetState() == ACTION_STATE::END)
+		{
+			vector<XBNode*> Tmp_node_Array, Tmp_node_Array2;
+			Tmp_node_Array.push_back(root_node);
+
+			//构造当前End Node的十层Path
+			for (int level = 0; level < MOTION_EDGE_FRAMENUM; level++)
+			{
+				vector<XBMotionEdge*> cur_level_edge_arr;
+				Tmp_node_Array2.clear();
+
+				//遍历Tmp_node_Array，构建当前Tmp_node_Array2
+				for (int cur_level_startnode_index = 0; cur_level_startnode_index < (int)Tmp_node_Array.size(); cur_level_startnode_index++)
+				{
+					XBNode* cur_level_startnode = Tmp_node_Array[cur_level_startnode_index];
+					if (cur_level_startnode)
+					{
+						vector<int> cur_level_path = root_node->CurrentLevelPath(level - 1, cur_level_startnode);
+						for (int edge_index = 0; edge_index < (int)cur_level_startnode->GetEdges().size(); edge_index++)
+						{
+							XBNode* cur_level_dstnode = cur_level_startnode->GetEdge(edge_index)->GetDst();
+
+							if (root_node->EdgesContainNode(level - 1, cur_level_dstnode) == false)
+							{
+								if (find(Tmp_node_Array2.begin(), Tmp_node_Array2.end(), cur_level_dstnode) != Tmp_node_Array2.end())
+								{
+									Tmp_node_Array2.push_back(cur_level_dstnode);
+									vector<int> path = cur_level_path;
+									path.push_back(cur_level_dstnode->GetIndex());
+
+									XBMotionEdge* newMotionEdge = new XBMotionEdge();
+									newMotionEdge->SetPathArr(path);
+									newMotionEdge->SetStartMotionIndex(root_node->GetMotionIndex());
+									newMotionEdge->SetEndMotionIndex(cur_level_dstnode->GetMotionIndex());
+									newMotionEdge->SetEndNodeIndex(cur_level_dstnode->GetIndex());
+
+									if (cur_level_dstnode->GetType() == ACTION_TYPE::IDLE)
+									{
+										newMotionEdge->SetType(MOTION_EDGE_TYPE::_2IDLE);
+									}
+									else if (cur_level_dstnode->GetType() != ACTION_TYPE::IDLE && cur_level_dstnode->GetType() != ACTION_TYPE::NONE
+										&& cur_level_dstnode->GetState() == ACTION_STATE::START)
+									{
+										newMotionEdge->SetType(MOTION_EDGE_TYPE::_2MOTIONSTART);
+									}
+									else
+									{
+										newMotionEdge->SetType(MOTION_EDGE_TYPE::_2None);
+									}
+
+									//存的edges里包含了很多的2node，这些边实际遍历中是没有用的，增加很多搜索成本
+									//但是构建下一步的path时不能没有
+									//所以我认为，应该在构建之后，把所有的2none都给删了
+									cur_level_edge_arr.push_back(newMotionEdge);
+								}
+								else
+								{
+									continue;
+								}
+								
+
+							}
+						}
+					}
+				}
+				
+				int cur_rootnode_MotionEdges_length = (int)root_node->GetMotionEdges().size();
+				if (cur_rootnode_MotionEdges_length <= level)
+				{
+					for (int foo = cur_rootnode_MotionEdges_length; foo < (level + 1); foo ++)
+					{
+						root_node->GetMotionEdges().push_back(vector<XBMotionEdge*>());
+					}
+				}
+
+				root_node->GetMotionEdges()[level] = cur_level_edge_arr;
+				Tmp_node_Array = Tmp_node_Array2;
+			}
+		}
+	}
+
+	return true;
+}
+
+#endif 

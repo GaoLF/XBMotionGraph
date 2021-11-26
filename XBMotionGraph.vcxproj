@@ -29,6 +29,7 @@
     <ClCompile Include="source\Edge.cpp" />
     <ClCompile Include="source\Graph.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Motion.cpp" />
     <ClCompile Include="source\Node.cpp" />
     <ClCompile Include="source\Pose.cpp" />
     <ClCompile Include="source\Prediction.cpp" />
@@ -44,6 +45,7 @@
     <ClInclude Include="Include\Cost.h" />
     <ClInclude Include="Include\Edge.h" />
     <ClInclude Include="Include\Graph.h" />
+    <ClInclude Include="Include\Motion.h" />
     <ClInclude Include="Include\Pose.h" />
     <ClInclude Include="Include\Node.h" />
     <ClInclude Include="Include\Prediction.h" />
@@ -124,6 +126,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\WorkGround\Animation\XBMotionGraph\eigen-3.4.0;C:\WorkGround\Animation\XBMotionGraph\jsoncpp-src-0.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
