@@ -46,9 +46,10 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 
 	//This part is wrote badly
 	//Inverse trans the vector, to assign the Edge "i -> i + 1"
-	for (int i = NodeNum - 1; i >= 0; i--)
+	for (int i = 0; i < NodeNum; i++)
 	{
 		XBNode* newNode = new XBNode();
+		newNode->SetIndex(i);
 		newNode->SetPose(poses[i]);
 		newNode->SetPoseForCostCalculation(poseFCCs[i]);
 
@@ -58,19 +59,19 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 		{
 			threshold = XBCost::Dist(poseFCCs[i], poseFCCs[i + 3]);
 		}
-		else if (i > 3)
+		else if (i >= 3)
 		{
 			threshold = XBCost::Dist(poseFCCs[i], poseFCCs[i - 3]);
 		}
 
-		if ((i + 1) < (int)poses.size() && Nodes.size() > 0)
+		if ((i - 1) >= 0)
 		{
 			XBEdge* newEdge = new XBEdge();
-			XBNode* node = Nodes[Nodes.size() - 1];
-			newEdge->SetSrc(newNode);
+			XBNode* node = Nodes[i - 1];
+			newEdge->SetSrc(node);
 			newEdge->SetDst(newNode);
-
-			newNode->AddEdge(newEdge);
+			node->SetThreshold(threshold);
+			node->AddEdge(newEdge);
 		}
 
 		Nodes.push_back(newNode);
@@ -161,6 +162,7 @@ void XBGraph::PrintMotionGraph()
 			cout << to_string(Nodes[i]->GetEdge(j)->GetDst()->GetIndex()) << ", ";
 		}
 	}
+	cout << endl;
 }
 
 bool XBGraph::SaveMotionGraphData(string file)
@@ -586,7 +588,7 @@ bool XBGraph::SetMotionState()
 				}
 			}
 
-			for (int m = i + startframe; m < endframe - j; m++)
+			for (int m = (i + startframe); m < (endframe - j); m++)
 			{
 				if (m < (int)Nodes.size())
 				{

@@ -7,7 +7,7 @@
 
 #include <time.h> 
 
-#define DEFAULT_NODE_THRESHOLD (10000.f)
+#define DEFAULT_NODE_THRESHOLD (100000000.f)
 
 //The Parameter K in the Yang(2020) Paper
 #define THRESHOLD_K (int(3))

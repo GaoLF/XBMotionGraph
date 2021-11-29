@@ -20,7 +20,7 @@ public:
 
 	vector<XBPose*>& GetAniForCostCalculation()
 	{
-		return Ani;
+		return AniForCostCalculation;
 	}
 
 	void AddPose(XBPose* pose)

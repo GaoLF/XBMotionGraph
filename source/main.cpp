@@ -26,6 +26,8 @@ int main()
 	ani->DownSampleSkeleton(NoitmBVHMask);
 	ann->SetTotalDuration(ani->GetFrameNum() * ani->GetFrameTime());
 	ann->AddIdleState();
+	ann->ConstuctStateMap();
+	ann->SortStates();
 
 #if FIRST_CONSTRUCT_GRAPH
 	XBGraph* graph = new XBGraph();
@@ -36,7 +38,7 @@ int main()
 	graph->LoadMotionGraphData("Motion/TestMotionGraph1.data");
 #endif
 	graph->PrintMotionGraph();
-	aim_ann->LoadJson("test1.json");
+	aim_ann->LoadJson("Annotation/test1.json");
 	output_ani = graph->Traverse(aim_ann);
 	
 	processor->ExportBVHFile("Motion/output1.bvh", ani);

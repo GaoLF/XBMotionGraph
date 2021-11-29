@@ -42,28 +42,28 @@ void XBAnimation::DownSampleFPS(float targetFPS)
 bool XBAnimation::DownSampleSkeleton(vector<bool> SkeletonMask)
 {
 	int SkeletonMaskSize = (int)SkeletonMask.size();
-	if ((int)Ani.size() != SkeletonMaskSize)
-	{
-		cerr << "Failed to Down Sample Skeleton." << endl;
-		return false;
-	}
 
 	AniForCostCalculation.clear();
 
 	for (int i = 0; i < (int)Ani.size(); i++)
 	{
+		if ((int)Ani[i]->GetLocations().size() != SkeletonMaskSize)
+		{
+			cerr << "Failed to Down Sample Skeleton." << endl;
+			return false;
+		}
+
 		XBPose* newCostPose = new XBPose();
 		XBPose* oriPose = Ani[i];
 		
 		newCostPose->SetIndex(oriPose->GetIndex());
 		newCostPose->SetName(oriPose->GetName());
-		for (int j = 0; j < SkeletonMaskSize; i++)
+		for (int j = 0; j < SkeletonMaskSize; j++)
 		{
 			if (SkeletonMask[j] == true)
 			{
 				newCostPose->AddLocation(oriPose->GetLocations()[j]);
 				newCostPose->AddRotation(oriPose->GetRotations()[j]);
-
 			}
 		}
 

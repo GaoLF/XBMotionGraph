@@ -63,8 +63,6 @@ public:
 		return TotalDuration;
 	}
 
-
-
 	bool LoadJson(std::string filename);
 
 	bool ParseJson(std::string filename);

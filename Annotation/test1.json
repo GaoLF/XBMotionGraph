@@ -1,6 +1,6 @@
 {
-FrameNumber: 200
-Annotations: [
+"FrameNumber": 200,
+"Annotations": [
 {
 	"start":0.0,
 	"end":1,
@@ -8,8 +8,8 @@ Annotations: [
 },
 
 {
-	"start":2.0,
-	"end":3,
+	"start":1.2,
+	"end":2,
 	"action":"WaveHand"
 }
 ]

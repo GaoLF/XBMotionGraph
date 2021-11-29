@@ -35,25 +35,30 @@ bool XBAnnotation::LoadJson(string filename)
 		return false;
 	}
 
-	if (AddIdleState() == false)
+	if (TotalDuration > 0)
 	{
-		cerr << "Failed to Add Idle State!" << endl;
-		return false;
+		if (AddIdleState() == false)
+		{
+			cerr << "Failed to Add Idle State!" << endl;
+			return false;
+		}
+
+		if (ConstuctStateMap() == false)
+		{
+			cerr << "Failed to Construct State Map!" << endl;
+			return false;
+		}
+
+		if (SortStates() == false)
+		{
+			cerr << "Failed to Sort State!" << endl;
+			return false;
+		}
 	}
 
-	if (ConstuctStateMap() == false)
-	{
-		cerr << "Failed to Construct State Map!" << endl;
-		return false;
-	}
+	
 
-	if (SortStates() == false)
-	{
-		cerr << "Failed to Sort State!" << endl;
-		return false;
-	}
-
-	cout << "Succeed to Load Json: " << filename << endl;
+	cout << "Succeed to Load Json without add idle: " << filename << endl;
 	return true;
 }
 
@@ -61,7 +66,7 @@ bool XBAnnotation::ParseJson(string filename)
 {
 	ifstream ifs;
 	ifs.open(filename);
-	assert(ifs.is_open());
+	//assert(ifs.is_open());
 
 	Json::Reader reader;
 	Json::Value root;
@@ -102,6 +107,7 @@ bool XBAnnotation::AddIdleState()
 	if (TotalDuration < 0)
 	{
 		cerr << "Warning: The Annotation's duration is not initialized." << endl;
+		return false;
 	}
 
 	int length = (int)states.size();
