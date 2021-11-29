@@ -91,7 +91,7 @@ public:
 	//cur: keystate -> last: idle
 	//cur: idle -> last: keystate
 	//Do not exist: cur: idle -> last: idle
-	bool ConstructAniByTwoStates(XBAnimation* NewAni, int startindex, XBKeyState* curState, XBKeyState* lastState);
+	bool ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState);
 #endif
 
 	bool SetMotionState();

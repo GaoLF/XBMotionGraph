@@ -60,6 +60,26 @@ enum class ACTION_TYPE
 	ACTIONTYPENUM,
 };
 
+static bool isKeyAction(ACTION_TYPE action)
+{
+	if (action >= ACTION_TYPE::ACTIONTYPENUM)
+	{
+		std::cerr << "Key Action Judgment error!" << std::endl;
+		return false;
+	}
+	else
+	{
+		if (action == ACTION_TYPE::IDLE || action == ACTION_TYPE::NONE)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+}
+
 //state的设置我认为可以有两种方法，标记或者程序自动设置
 //眼下先使用第二种方法
 //state,start,end与annotation中的意义皆不同

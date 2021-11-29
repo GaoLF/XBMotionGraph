@@ -796,19 +796,284 @@ bool XBGraph::ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState
 	return true;
 }
 
-bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, int startindex, XBKeyState* curState, XBKeyState* lastState)
+bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState)
 {
 	if (NewAni == NULL || curState == NULL || lastState == NULL)
 	{
 		cerr << "Wrong Point!" << endl;
 	}
 
+	int interval = int((curState->start - lastState->end) * (float)FPS);
+	if (interval > MOTION_EDGE_FRAMENUM || interval < 0)
+		return false;
+
+	int length = int(curState->end * (float)FPS);
+
+	if ((int)NewAni->GetAni().size() < length)
+	{
+		for (int i = (int)NewAni->GetAni().size(); i < length; i++)
+		{
+			NewAni->AddPose(new XBPose());
+		}
+	}
+
+	int startindex = (int)(lastState->end * float(FPS)) + 1;
+
 	//key -> key
+	if (isKeyAction(lastState->action) && isKeyAction(curState->action))
+	{
 
-	//key -> idle
+		int endindex = startindex;
+		int endinverseindex = 0;
+		bool bMatched = false;
+		XBMotion* CurrentMotion = NULL;
+		vector<int> tmp_path;
+		for (; endinverseindex < ACTION_END_FRAME_NUM; endinverseindex++)
+		{
+			if (endindex >= 0 && endindex < (int)Nodes.size())
+			{
+				XBNode* endnode = Nodes[endindex];
+				if (endnode == nullptr)
+					continue;
 
-	//idle -> idle
+				if (interval < (int)endnode->GetMotionEdges().size())
+				{
+					vector<XBMotionEdge*> tmp_MB_arr = endnode->GetMotionEdges()[interval + endinverseindex];
+					for (int item = 0; item < (int)tmp_MB_arr.size(); item++)
+					{
+						if (tmp_MB_arr[item]->GetType() == MOTION_EDGE_TYPE::_2MOTIONSTART)
+						{
+							int tmp_edge2index = tmp_MB_arr[item]->GetEndMotionIndex();
+							XBMotion* tmp_M = motions[tmp_edge2index];
+							if (tmp_M->GetType() == curState->action)
+							{
+								//Congratulations!
+								bMatched = true;
+								tmp_path = tmp_MB_arr[item]->GetPathArr();
+								CurrentMotion = tmp_M;
+								break;
+							}
 
+						}
+					}
+				}
+			}
+		}
+
+		if (bMatched)
+		{
+			for (int i = 0; i < (endinverseindex + interval); i++)
+			{
+				XBNode* tmp_node = Nodes[tmp_path[i]];
+				if (tmp_node)
+				{
+					NewAni->GetAni()[startindex - endinverseindex + i] = tmp_node->GetPose();
+				}
+				else
+				{
+					cerr << "Failed to Build the Ani!" << endl;
+				}
+			}
+
+			if (CurrentMotion)
+			{
+				int CurrentMotionIndex = int(curState->start * (float)FPS);
+				int CurrentMotionFrameNum = int((curState->end - curState->start) * (float)FPS);
+				int annindex = CurrentMotion->GetAnnIndex();
+				int MotionStartFrameIndex = int(Annotation->GetState(annindex)->start * float(FPS));
+
+
+				for (int i = 0; i < CurrentMotionFrameNum; i++)
+				{
+					if (MotionStartFrameIndex + i < (int)Nodes.size())
+					{
+						NewAni->GetAni()[CurrentMotionIndex + i] = Nodes[MotionStartFrameIndex + i]->GetPose();
+					}
+				}
+			}
+			else
+			{
+				cerr << "CurrentMotion is bad point" << endl;
+				return false;
+			}
+		}
+		else
+		{
+			cerr << "Not matched!" << endl;
+			return false;
+		}
+	}
+
+
+	//Key -> Idle
+	else if (isKeyAction(lastState->action) && curState->action == ACTION_TYPE::IDLE)
+	{
+
+		int endindex = startindex;
+		int endinverseindex = 0;
+		XBMotion* CurrentMotion = NULL;
+		bool bMatched = false;
+		vector<int> tmp_path;
+		for (; endinverseindex < ACTION_END_FRAME_NUM; endinverseindex++)
+		{
+			if (endindex >= 0 && endindex < (int)Nodes.size())
+			{
+				XBNode* endnode = Nodes[endindex];
+				if (endnode == nullptr)
+					continue;
+
+				if (interval < (int)endnode->GetMotionEdges().size())
+				{
+					vector<XBMotionEdge*> tmp_MB_arr = endnode->GetMotionEdges()[interval + endinverseindex];
+					for (int item = 0; item < (int)tmp_MB_arr.size(); item++)
+					{
+						if (tmp_MB_arr[item]->GetType() == MOTION_EDGE_TYPE::_2IDLE)
+						{
+							int tmp_edge2index = tmp_MB_arr[item]->GetEndMotionIndex();
+							XBMotion* tmp_M = motions[tmp_edge2index];
+							if (tmp_M->GetType() == curState->action)
+							{
+								//Congratulations!
+								bMatched = true;
+								CurrentMotion = tmp_M;
+								tmp_path = tmp_MB_arr[item]->GetPathArr();
+								break;
+							}
+
+						}
+					}
+				}
+			}
+		}
+
+		if (bMatched)
+		{
+			for (int i = 0; i < (endinverseindex + interval); i++)
+			{
+				XBNode* tmp_node = Nodes[tmp_path[i]];
+				if (tmp_node)
+				{
+					NewAni->GetAni()[startindex - endinverseindex + i] = tmp_node->GetPose();
+				}
+				else
+				{
+					cerr << "Failed to Build the Ani!" << endl;
+				}
+			}
+
+			if (CurrentMotion)
+			{
+				int CurrentMotionIndex = int(curState->start * (float)FPS);
+				int CurrentMotionFrameNum = int((curState->end - curState->start) * (float)FPS);
+				int annindex = CurrentMotion->GetAnnIndex();
+				int MotionStartFrameIndex = int(Annotation->GetState(annindex)->start * float(FPS));
+
+
+				for (int i = 0; i < CurrentMotionFrameNum; i++)
+				{
+					if (MotionStartFrameIndex + i < (int)Nodes.size())
+					{
+						NewAni->GetAni()[CurrentMotionIndex + i] = Nodes[MotionStartFrameIndex + i]->GetPose();
+					}
+				}
+			}
+			else
+			{
+				cerr << "CurrentMotion is bad point" << endl;
+				return false;
+			}
+		}
+		else
+		{
+			cerr << "Not matched!" << endl;
+			return false;
+		}
+	}
+
+	//Idle -> Key
+	if (lastState->action == ACTION_TYPE::IDLE && isKeyAction(curState->action))
+	{
+		int endindex = startindex;
+		int maxInverseIterNum = int((lastState->end - lastState->start) * (float)FPS);
+		int endinverseindex = 0;
+		bool bMatched = false;
+		XBMotion* CurrentMotion = NULL;
+		vector<int> tmp_path;
+		for (; endinverseindex < maxInverseIterNum; endinverseindex++)
+		{
+			if (endindex >= 0 && endindex < (int)Nodes.size())
+			{
+				XBNode* endnode = Nodes[endindex];
+				if (endnode == nullptr)
+					continue;
+
+				if (interval < (int)endnode->GetMotionEdges().size())
+				{
+					vector<XBMotionEdge*> tmp_MB_arr = endnode->GetMotionEdges()[interval + endinverseindex];
+					for (int item = 0; item < (int)tmp_MB_arr.size(); item++)
+					{
+						if (tmp_MB_arr[item]->GetType() == MOTION_EDGE_TYPE::_2MOTIONSTART)
+						{
+							int tmp_edge2index = tmp_MB_arr[item]->GetEndMotionIndex();
+							XBMotion* tmp_M = motions[tmp_edge2index];
+							if (tmp_M->GetType() == curState->action)
+							{
+								//Congratulations!
+								bMatched = true;
+								tmp_path = tmp_MB_arr[item]->GetPathArr();
+								CurrentMotion = tmp_M;
+								break;
+							}
+
+						}
+					}
+				}
+			}
+		}
+
+		if (bMatched)
+		{
+			for (int i = 0; i < (endinverseindex + interval); i++)
+			{
+				XBNode* tmp_node = Nodes[tmp_path[i]];
+				if (tmp_node)
+				{
+					NewAni->GetAni()[startindex - endinverseindex + i] = tmp_node->GetPose();
+				}
+				else
+				{
+					cerr << "Failed to Build the Ani!" << endl;
+				}
+			}
+
+			if (CurrentMotion)
+			{
+				int CurrentMotionIndex = int(curState->start * (float)FPS);
+				int CurrentMotionFrameNum = int((curState->end - curState->start) * (float)FPS);
+				int annindex = CurrentMotion->GetAnnIndex();
+				int MotionStartFrameIndex = int(Annotation->GetState(annindex)->start * float(FPS));
+
+
+				for (int i = 0; i < CurrentMotionFrameNum; i++)
+				{
+					if (MotionStartFrameIndex + i < (int)Nodes.size())
+					{
+						NewAni->GetAni()[CurrentMotionIndex + i] = Nodes[MotionStartFrameIndex + i]->GetPose();
+					}
+				}
+			}
+			else
+			{
+				cerr << "CurrentMotion is bad point" << endl;
+				return false;
+			}
+		}
+		else
+		{
+			cerr << "Not matched!" << endl;
+			return false;
+		}
+	}
 
 	return true;
 }
