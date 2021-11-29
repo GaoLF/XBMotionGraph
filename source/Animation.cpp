@@ -11,7 +11,7 @@ XBAnimation::XBAnimation()
 
 }
 
-void XBAnimation::DownSample(float targetFPS)
+void XBAnimation::DownSampleFPS(float targetFPS)
 {
 	float timeinterval = 1.0f / targetFPS;
 
@@ -37,4 +37,38 @@ void XBAnimation::DownSample(float targetFPS)
 	}
 
 	FrameNum = Ani.size();
+}
+
+bool XBAnimation::DownSampleSkeleton(vector<bool> SkeletonMask)
+{
+	int SkeletonMaskSize = (int)SkeletonMask.size();
+	if ((int)Ani.size() != SkeletonMaskSize)
+	{
+		cerr << "Failed to Down Sample Skeleton." << endl;
+		return false;
+	}
+
+	AniForCostCalculation.clear();
+
+	for (int i = 0; i < (int)Ani.size(); i++)
+	{
+		XBPose* newCostPose = new XBPose();
+		XBPose* oriPose = Ani[i];
+		
+		newCostPose->SetIndex(oriPose->GetIndex());
+		newCostPose->SetName(oriPose->GetName());
+		for (int j = 0; j < SkeletonMaskSize; i++)
+		{
+			if (SkeletonMask[j] == true)
+			{
+				newCostPose->AddLocation(oriPose->GetLocations()[j]);
+				newCostPose->AddRotation(oriPose->GetRotations()[j]);
+
+			}
+		}
+
+		AniForCostCalculation.push_back(newCostPose);
+	}
+
+	return true;
 }

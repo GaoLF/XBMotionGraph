@@ -18,6 +18,11 @@ public:
 		return Ani;
 	}
 
+	vector<XBPose*>& GetAniForCostCalculation()
+	{
+		return Ani;
+	}
+
 	void AddPose(XBPose* pose)
 	{
 		if (pose)
@@ -54,8 +59,9 @@ public:
 		FrameTime = value;
 	}
 
-	void DownSample(float targetFPS = FPS);
+	void DownSampleFPS(float targetFPS = FPS);
 
+	bool DownSampleSkeleton(std::vector<bool>);
 	//Private Function
 
 
@@ -68,6 +74,8 @@ private:
 	float FrameTime;
 
 	vector<XBPose*> Ani;
+
+	vector<XBPose*> AniForCostCalculation;
 
 	//XBPose* FirstPose;
 

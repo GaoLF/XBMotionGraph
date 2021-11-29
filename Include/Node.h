@@ -41,6 +41,16 @@ public :
 		Pose = pose;
 	};
 
+	XBPose* GetPoseForCostCalculation()
+	{
+		return PoseForCostCalculation;
+	}
+
+	void SetPoseForCostCalculation(XBPose* pose)
+	{
+		PoseForCostCalculation = pose;
+	}
+
 	void AddEdge(XBEdge* edge)
 	{
 		if (std::find(Edges.begin(), Edges.end(), edge) != Edges.end())
@@ -131,6 +141,7 @@ private:
 
 	int Index;
 	XBPose* Pose;
+	XBPose* PoseForCostCalculation;
 	std::vector<XBEdge*> Edges;
 
 	float Threshold;

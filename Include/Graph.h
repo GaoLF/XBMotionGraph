@@ -30,19 +30,19 @@ public:
 
 	//Motion Graph Data Format:
 	//--------Nodes Number
-	//--------//Dst: the edge is Node1->Dst1 and Dist is the distance between them
+	//--------**Dst: the edge is Node1->Dst1 and Dist is the distance between them
 	//--------Node1 Dst1 Dist1 Dst2 Dist2..
 	//--------Node2 Dst1 Dist1 Dst2 Dist3..
-	//--------//Nodes Animation Data
+	//--------**Nodes Animation Data
 	//--------Node1.Index Node1.flag Location Rotation
 	bool LoadMotionGraphData(string file);
 
 	//Motion Graph Data Format:
 	//--------Nodes Number
-	//--------//Dst: the edge is Node1->Dst1 and Dist is the distance between them
+	//--------**Dst: the edge is Node1->Dst1 and Dist is the distance between them
 	//--------Node1 Dst1 Dist1 Dst2 Dist2..
 	//--------Node2 Dst1 Dist1 Dst2 Dist3..
-	//--------//Nodes Animation Data
+	//--------**Nodes Animation Data
 	//--------Node1.Index Node1.flag Location Rotation
 	bool SaveMotionGraphData(string file);
 	

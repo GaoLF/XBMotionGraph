@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Graph.h"
 #include <BVHLoader.h>
+#include "Skeleton.h"
 using namespace std;
 
 #define FIRST_CONSTRUCT_GRAPH 1
@@ -20,8 +21,9 @@ int main()
 
 	//Init the input animation and the input annotation
 	ann->LoadJson("Annotation/input1.json");
-	processor->LoadBVHFile("Motion/input1.bvh", ani, ann);
-	ani->DownSample();
+	processor->LoadBVHFile("Motion/input1.bvh", ani, ann); 
+	ani->DownSampleFPS();
+	ani->DownSampleSkeleton(NoitmBVHMask);
 	ann->SetTotalDuration(ani->GetFrameNum() * ani->GetFrameTime());
 	ann->AddIdleState();
 

@@ -56,6 +56,15 @@ public:
 		return Index;
 	}
 
+	void SetName(std::string value)
+	{
+		Name = value;
+	}
+
+	std::string GetName()
+	{
+		return Name;
+	}
 
 	//Local Function
 

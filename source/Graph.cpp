@@ -41,6 +41,7 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 	Annotation = ann;
 
 	vector<XBPose*> poses = ani->GetAni();
+	vector<XBPose*> poseFCCs = ani->GetAniForCostCalculation();
 	int NodeNum = poses.size();
 
 	//This part is wrote badly
@@ -49,16 +50,17 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 	{
 		XBNode* newNode = new XBNode();
 		newNode->SetPose(poses[i]);
+		newNode->SetPoseForCostCalculation(poseFCCs[i]);
 
 		//Set the Threshold
 		float threshold = DEFAULT_NODE_THRESHOLD;
 		if ((i + 3) < (int)poses.size())
 		{
-			threshold = XBCost::Dist(poses[i], poses[i + 3]);
+			threshold = XBCost::Dist(poseFCCs[i], poseFCCs[i + 3]);
 		}
 		else if (i > 3)
 		{
-			threshold = XBCost::Dist(poses[i], poses[i - 3]);
+			threshold = XBCost::Dist(poseFCCs[i], poseFCCs[i - 3]);
 		}
 
 		if ((i + 1) < (int)poses.size() && Nodes.size() > 0)
