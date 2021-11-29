@@ -92,9 +92,14 @@ public:
 	//cur: idle -> last: keystate
 	//Do not exist: cur: idle -> last: idle
 	bool ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState);
-#endif
 
 	bool SetMotionState();
+#endif
+
+	//为所有Node标记Type
+	bool LabelNodesType();
+
+
 
 
 	//Public Variable

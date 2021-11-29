@@ -53,7 +53,7 @@ public :
 
 	void AddEdge(XBEdge* edge)
 	{
-		if (std::find(Edges.begin(), Edges.end(), edge) != Edges.end())
+		if (std::find(Edges.begin(), Edges.end(), edge) == Edges.end())
 			Edges.push_back(edge);
 	};
 

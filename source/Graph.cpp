@@ -44,7 +44,6 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 	vector<XBPose*> poseFCCs = ani->GetAniForCostCalculation();
 	int NodeNum = poses.size();
 
-	//This part is wrote badly
 	//Inverse trans the vector, to assign the Edge "i -> i + 1"
 	for (int i = 0; i < NodeNum; i++)
 	{
@@ -87,7 +86,7 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 
 			float threshold = CurNode->GetThreshold();
 
-			float dist = XBCost::Dist(CurNode->GetPose(), Nodes[j]->GetPose());
+			float dist = XBCost::Dist(CurNode->GetPoseForCostCalculation(), Nodes[j]->GetPoseForCostCalculation());
 			if (dist < threshold)
 			{
 				XBEdge* newEdge = new XBEdge;
@@ -102,6 +101,8 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 		
 	}
 	cout << endl;
+
+	LabelNodesType();
 
 #if TEST_METHOD_2
 	ConstructMotions();
@@ -641,7 +642,7 @@ bool XBGraph::ConstructMotions()
 
 							if (root_node->EdgesContainNode(level - 1, cur_level_dstnode) == false)
 							{
-								if (find(Tmp_node_Array2.begin(), Tmp_node_Array2.end(), cur_level_dstnode) != Tmp_node_Array2.end())
+								if (find(Tmp_node_Array2.begin(), Tmp_node_Array2.end(), cur_level_dstnode) == Tmp_node_Array2.end())
 								{
 									Tmp_node_Array2.push_back(cur_level_dstnode);
 									vector<int> path = cur_level_path;
@@ -1082,3 +1083,28 @@ bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState,
 	return true;
 }
 #endif 
+
+bool XBGraph::LabelNodesType()
+{
+	if (!Annotation || !Animation)
+		return false;
+
+	int length = Annotation->GetStates().size();
+	for (int stateindex = 0; stateindex < length; stateindex++)
+	{
+		XBKeyState* state = Annotation->GetState(stateindex);
+
+		int startframe = int(state->start * float(FPS));
+		int endframe = int(state->end * float(FPS));
+
+		for (int i = startframe; i < endframe; i++)
+		{
+			if (i < (int)Nodes.size())
+			{
+				Nodes[i]->SetType(state->action);
+			}
+		}
+	}
+
+	return true;
+}

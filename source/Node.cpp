@@ -12,7 +12,7 @@ bool XBNode::EdgesContainNode(int prelevel,XBNode* node)
 	{
 		if (i >= (int)motionedges.size())
 			continue;
-		for (int j = 0; j < (int)motionedges[i].size(); i++)
+		for (int j = 0; j < (int)motionedges[i].size(); j++)
 		{
 			XBMotionEdge* edge = motionedges[i][j];
 			for (int m = 0; m < (int)edge->GetPathArr().size(); m++)

@@ -171,7 +171,7 @@ bool XBAnnotation::ConstuctStateMap()
 		if (states[i] != NULL)
 		{
 			ACTION_TYPE type = states[i]->action;
-			if (StateMap.find(type) != StateMap.end())
+			if (StateMap.find(type) == StateMap.end())
 			{
 				StateMap[type].push_back(i);
 			}
