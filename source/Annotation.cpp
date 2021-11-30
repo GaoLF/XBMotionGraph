@@ -17,7 +17,6 @@ XBKeyState::XBKeyState()
 
 XBKeyState::~XBKeyState()
 {
-
 }
 
 
@@ -25,6 +24,14 @@ XBKeyState::~XBKeyState()
 XBAnnotation::XBAnnotation()
 {
 	TotalDuration = -1.f;
+}
+
+XBAnnotation::~XBAnnotation()
+{
+	for (int i = 0; i < states.size(); i++)
+	{
+		delete states[i];
+	}
 }
 
 bool XBAnnotation::LoadJson(string filename, bool Aimed)

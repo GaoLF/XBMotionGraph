@@ -131,7 +131,7 @@ static int Time2Frame(float time_value)
 	return ret;
 }
 
-//一个时刻转换为第几帧，需要-1
+//一个时刻转换为第几帧，需要
 static int Time2FrameIndex(float time_value)
 {
 	return Time2Frame(time_value);

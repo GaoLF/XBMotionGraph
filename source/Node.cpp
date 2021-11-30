@@ -2,8 +2,36 @@
 #include "TypeDefinition.h"
 #include "Motion.h"
 
+XBNode::XBNode()
+{
+	Pose = new XBPose();
+	Threshold = DEFAULT_NODE_THRESHOLD;
+	Index = 0;
+};
+
+XBNode::~XBNode()
+{
+
+	delete Pose;
+	delete PoseForCostCalculation;
+
+	for (int i = 0; i < (int)Edges.size(); i++)
+	{
+		delete Edges[i];
+	}
 #if TEST_METHOD_2
-bool XBNode::EdgesContainNode(int prelevel,XBNode* node)
+	for (int i = 0; i < (int)motionedges.size(); i++)
+	{
+		for (int j = 0; j < (int)(motionedges[i].size()); j++)
+		{
+			delete motionedges[i][j];
+		}
+	}
+#endif
+};
+
+#if TEST_METHOD_2
+bool XBNode::EdgesContainNode(int prelevel, XBNode* node)
 {
 	if (prelevel < 0)
 		return false;
@@ -47,3 +75,4 @@ vector<int> XBNode::CurrentLevelPath(int level, XBNode* node)
 	return vector<int>();
 }
 #endif
+

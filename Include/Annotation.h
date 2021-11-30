@@ -34,6 +34,7 @@ public:
 	//Primary Function
 	XBAnnotation();
 
+	~XBAnnotation();
 	//Public Function
 	std::vector<XBKeyState*> GetStates()
 	{

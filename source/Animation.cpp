@@ -11,6 +11,19 @@ XBAnimation::XBAnimation()
 
 }
 
+XBAnimation::~XBAnimation()
+{
+	for (int i = 0; i < Ani.size(); i++)
+	{
+		delete Ani[i];
+	}
+
+	for (int j = 0; j < AniForCostCalculation.size(); j++)
+	{
+		delete AniForCostCalculation[j];
+	}
+}
+
 void XBAnimation::DownSampleFPS(float targetFPS)
 {
 	float timeinterval = 1.0f / targetFPS;

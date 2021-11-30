@@ -18,6 +18,7 @@ XBGraph::XBGraph()
 
 XBGraph::~XBGraph()
 {
+
 	for (int i = 0; i < (int)Nodes.size(); i++)
 	{
 		delete Nodes[i];
@@ -27,8 +28,20 @@ XBGraph::~XBGraph()
 		delete Edges[i];
 	}
 
+	for (int i = 0; i < (int)Edges.size(); i++)
+	{
+		delete Trans[i];
+	}
+
 	delete Animation;
 	delete Annotation;
+
+#if TEST_METHOD_2
+	for (int i = 0; i < (int)motions.size(); i++)
+	{
+		delete motions[i];
+	}
+#endif
 };
 
 bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)

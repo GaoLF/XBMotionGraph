@@ -7,6 +7,7 @@ class XBEdge
 {
 public:
 	XBEdge();
+	~XBEdge();
 
 	void SetSrc(XBNode* node)
 	{

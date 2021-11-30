@@ -17,17 +17,11 @@ class XBNode
 {
 	//Primary Function
 public :
-	XBNode()
-	{
-		Pose = new XBPose();
-		Threshold = DEFAULT_NODE_THRESHOLD;
-		Index = 0;
-	};
+	XBNode();
 
-	~XBNode()
-	{
 
-	};
+	~XBNode();
+
 
 	//Public Function
 

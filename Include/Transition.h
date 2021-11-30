@@ -11,10 +11,8 @@ public:
 	XBTransition();
 
 
-	~XBTransition()
-	{
+	~XBTransition();
 
-	};
 
 	//Public Function
 	void SetStart(float value)
