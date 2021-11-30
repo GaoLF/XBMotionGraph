@@ -36,7 +36,7 @@
 
 //把每一个部分叫做Section
 //Section有两种，Key Section和Transition Section
-#define TEST_METHOD_1 1
+#define TEST_METHOD_1 0
 
 //将Section定义为Motion分为start，peak和end的方法
 #define TEST_METHOD_2 1
@@ -105,7 +105,7 @@ enum class MOTION_EDGE_TYPE
 
 #define ACTION_START_FRAME_NUM (5)
 #define ACTION_END_FRAME_NUM   (5)
-#define MOTION_EDGE_FRAMENUM   (10)
+#define MOTION_EDGE_FRAMENUM   (15)
 #endif
 
 const std::string Str_Action_Type[] = {
@@ -122,5 +122,19 @@ void split(const std::string& s, std::vector<std::string>& tokens, const std::st
 int GetRandomNum(int minv, int maxv);
 
 int GetRandomNum(int maxv);
+
+//时间间隔转换为帧数
+static int Time2Frame(float time_value)
+{
+	float frames_f = time_value * (float)(FPS);
+	int ret = (int)(frames_f + 0.5f);
+	return ret;
+}
+
+//一个时刻转换为第几帧，需要-1
+static int Time2FrameIndex(float time_value)
+{
+	return Time2Frame(time_value);
+}
 
 #endif//_TYPEDEFINITION_H

@@ -63,7 +63,11 @@ public:
 		return TotalDuration;
 	}
 
-	bool LoadJson(std::string filename);
+	//before已经说过了，ann有两种，一种是训练的标注文件，一种是生成动画的配置文件
+	//bAimed即是他的标识符
+	//区别在于，trainann的一些关键信息，比如总时长，需要动画文件的信息来填充
+	//而生成的tryann，则是自动填充信息，来帮助动画文件的生成
+	bool LoadJson(std::string filename, bool bAimed = false);
 
 	bool ParseJson(std::string filename);
 

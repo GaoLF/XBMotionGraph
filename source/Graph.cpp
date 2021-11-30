@@ -63,13 +63,15 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 			threshold = XBCost::Dist(poseFCCs[i], poseFCCs[i - 3]);
 		}
 
+		newNode->SetThreshold(threshold);
+
 		if ((i - 1) >= 0)
 		{
 			XBEdge* newEdge = new XBEdge();
 			XBNode* node = Nodes[i - 1];
 			newEdge->SetSrc(node);
 			newEdge->SetDst(newNode);
-			node->SetThreshold(threshold);
+			
 			node->AddEdge(newEdge);
 		}
 
@@ -119,6 +121,9 @@ XBAnimation* XBGraph::Traverse(XBAnnotation* tryann)
 		return NULL;
 
 	XBAnimation* NewAni = new XBAnimation();
+
+	NewAni->SetFrameNum(Time2Frame(tryann->GetTotalDuration()));
+	NewAni->SetFrameTime(1.0 / float(FPS));
 
 #if TEST_METHOD_1
 	if (TraverseHandleKeySection(NewAni, tryann) == false)
@@ -383,7 +388,7 @@ bool XBGraph::TraverseHandleKeySection(XBAnimation* RetAni, XBAnnotation* tryann
 	}
 
 	float total_Duration = tryann->GetTotalDuration();
-	int total_Frame = (int)(total_Duration * FPS);
+	int total_Frame = Time2Frame(total_Duration);
 	if ((int)RetAni->GetAni().size() < total_Frame)
 	{
 		for (int i = (int)RetAni->GetAni().size(); i < total_Frame; i++)
@@ -408,10 +413,10 @@ bool XBGraph::TraverseHandleKeySection(XBAnimation* RetAni, XBAnnotation* tryann
 
 			float start = state->start;
 			float end = state->end;
-			int start_frame = int(start * FPS);
-			int end_frame = int(end * FPS);
-			int max_section_size = (int)((try_state->end - try_state->start) * FPS);
-			int begin_frame = (int)(try_state->start * FPS);
+			int start_frame = Time2FrameIndex(start);
+			int end_frame = Time2FrameIndex(end);
+			int max_section_size = Time2FrameIndex(try_state->end - try_state->start);
+			int begin_frame = Time2FrameIndex(try_state->start);
 
 			for (int j = start_frame; j < end_frame; j++)
 			{
@@ -466,8 +471,8 @@ bool XBGraph::HandleTran(XBTransition* tran)
 
 	float start = tran->GetStart();
 	float end = tran->GetEnd();
-	int start_frame = (int)(start * FPS) + 1;
-	int end_frame = (int)(end * FPS) - 1;
+	int start_frame = Time2Frame(start) + 1;
+	int end_frame = Time2Frame(end) - 1;
 
 	int start_refer_frame = start_frame - 1;
 	int end_refer_frame = end_frame + 1;
@@ -550,8 +555,8 @@ bool XBGraph::SetMotionState()
 		XBMotion* newmotion = new XBMotion();
 		newmotion->SetAnnIndex(stateindex);
 		newmotion->SetType(state->action);
-		int startframe = int(state->start * float(FPS));
-		int endframe = int(state->end * float(FPS));
+		int startframe = Time2Frame(state->start);
+		int endframe = Time2Frame(state->end);
 
 		if (state->action == ACTION_TYPE::IDLE)
 		{
@@ -697,7 +702,13 @@ bool XBGraph::ConstructMotions()
 				Tmp_node_Array = Tmp_node_Array2;
 			}
 		}
+
+
+		cout << "               \r";
+		cout << (float)nodeindex / (float)length * 100.f << "%\r";
 	}
+
+	cout << endl;
 
 	return true;
 }
@@ -707,9 +718,21 @@ bool XBGraph::TraverseHandleMotions(XBAnimation* NewAni, XBAnnotation* tryann)
 	if (NewAni == nullptr || tryann == nullptr)
 		return false;
 
+	float total_Duration = tryann->GetTotalDuration();
+	int total_Frame = Time2Frame(total_Duration);
+	if ((int)NewAni->GetAni().size() < total_Frame)
+	{
+		for (int i = (int)NewAni->GetAni().size(); i < total_Frame; i++)
+		{
+			XBPose* newPose = new XBPose();
+			NewAni->AddPose(newPose);
+		}
+	}
+
+
 	for (int AnnStateIndex = 0; AnnStateIndex < (int)tryann->GetStates().size(); AnnStateIndex++)
 	{
-		XBKeyState* curState = Annotation->GetState(AnnStateIndex);
+		XBKeyState* curState = tryann->GetState(AnnStateIndex);
 		
 
 		if (!curState)
@@ -727,7 +750,7 @@ bool XBGraph::TraverseHandleMotions(XBAnimation* NewAni, XBAnnotation* tryann)
 		}
 		else
 		{
-			XBKeyState* lastState = Annotation->GetState(AnnStateIndex - 1);
+			XBKeyState* lastState = tryann->GetState(AnnStateIndex - 1);
 			if (lastState == nullptr)
 			{
 				cerr << "Failed to Get the Last State!" << endl;
@@ -779,7 +802,7 @@ bool XBGraph::ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState
 	}
 
 	XBKeyState* min_error_state = Annotation->GetState(min_error_index);
-	int framenum = (int)((min_error_state->end - min_error_state->start) * (float)FPS);
+	int framenum = Time2Frame(min_error_state->end - min_error_state->start);
 	
 	//this condition decision is needless, but in order to make debug easy, don't delete it
 	if ((int)NewAni->GetAni().size() <= framenum)
@@ -792,7 +815,7 @@ bool XBGraph::ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState
 	
 	for (int i = 0; i < framenum; i++)
 	{
-		int cur_frame_index = (int)(min_error_state->start * float(FPS)) + i;
+		int cur_frame_index = Time2Frame(min_error_state->start) + i;
 		
 		NewAni->GetAni()[i] = Nodes[cur_frame_index]->GetPose();
 
@@ -808,11 +831,11 @@ bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState,
 		cerr << "Wrong Point!" << endl;
 	}
 
-	int interval = int((curState->start - lastState->end) * (float)FPS);
+	int interval = Time2Frame(curState->start - lastState->end);
 	if (interval > MOTION_EDGE_FRAMENUM || interval < 0)
 		return false;
 
-	int length = int(curState->end * (float)FPS);
+	int length = Time2Frame(curState->end);
 
 	if ((int)NewAni->GetAni().size() < length)
 	{
@@ -822,28 +845,28 @@ bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState,
 		}
 	}
 
-	int startindex = (int)(lastState->end * float(FPS)) + 1;
+	int startindex = Time2FrameIndex(lastState->end);
 
 	//key -> key
 	if (isKeyAction(lastState->action) && isKeyAction(curState->action))
 	{
 
-		int endindex = startindex;
+		int endindex = startindex - 1;
 		int endinverseindex = 0;
 		bool bMatched = false;
 		XBMotion* CurrentMotion = NULL;
 		vector<int> tmp_path;
 		for (; endinverseindex < ACTION_END_FRAME_NUM; endinverseindex++)
 		{
-			if (endindex >= 0 && endindex < (int)Nodes.size())
+			if (endindex - endinverseindex >= 0 && endindex - endinverseindex < (int)Nodes.size())
 			{
-				XBNode* endnode = Nodes[endindex];
+				XBNode* endnode = Nodes[endindex - endinverseindex];
 				if (endnode == nullptr)
 					continue;
 
-				if (interval < (int)endnode->GetMotionEdges().size())
+				if (interval + endinverseindex - 1 < (int)endnode->GetMotionEdges().size())
 				{
-					vector<XBMotionEdge*> tmp_MB_arr = endnode->GetMotionEdges()[interval + endinverseindex];
+					vector<XBMotionEdge*> tmp_MB_arr = endnode->GetMotionEdges()[interval + endinverseindex - 1];
 					for (int item = 0; item < (int)tmp_MB_arr.size(); item++)
 					{
 						if (tmp_MB_arr[item]->GetType() == MOTION_EDGE_TYPE::_2MOTIONSTART)
@@ -862,6 +885,9 @@ bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState,
 						}
 					}
 				}
+
+				if (bMatched)
+					break;
 			}
 		}
 
@@ -882,10 +908,10 @@ bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState,
 
 			if (CurrentMotion)
 			{
-				int CurrentMotionIndex = int(curState->start * (float)FPS);
-				int CurrentMotionFrameNum = int((curState->end - curState->start) * (float)FPS);
+				int CurrentMotionIndex = Time2Frame(curState->start);
+				int CurrentMotionFrameNum = Time2Frame(curState->end - curState->start);
 				int annindex = CurrentMotion->GetAnnIndex();
-				int MotionStartFrameIndex = int(Annotation->GetState(annindex)->start * float(FPS));
+				int MotionStartFrameIndex = Time2Frame(Annotation->GetState(annindex)->start);
 
 
 				for (int i = 0; i < CurrentMotionFrameNum; i++)
@@ -968,10 +994,10 @@ bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState,
 
 			if (CurrentMotion)
 			{
-				int CurrentMotionIndex = int(curState->start * (float)FPS);
-				int CurrentMotionFrameNum = int((curState->end - curState->start) * (float)FPS);
+				int CurrentMotionIndex = Time2Frame(curState->start);
+				int CurrentMotionFrameNum = Time2Frame(curState->end - curState->start);
 				int annindex = CurrentMotion->GetAnnIndex();
-				int MotionStartFrameIndex = int(Annotation->GetState(annindex)->start * float(FPS));
+				int MotionStartFrameIndex = Time2Frame(Annotation->GetState(annindex)->start);
 
 
 				for (int i = 0; i < CurrentMotionFrameNum; i++)
@@ -999,7 +1025,7 @@ bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState,
 	if (lastState->action == ACTION_TYPE::IDLE && isKeyAction(curState->action))
 	{
 		int endindex = startindex;
-		int maxInverseIterNum = int((lastState->end - lastState->start) * (float)FPS);
+		int maxInverseIterNum = Time2Frame(lastState->end - lastState->start);
 		int endinverseindex = 0;
 		bool bMatched = false;
 		XBMotion* CurrentMotion = NULL;
@@ -1053,10 +1079,10 @@ bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState,
 
 			if (CurrentMotion)
 			{
-				int CurrentMotionIndex = int(curState->start * (float)FPS);
-				int CurrentMotionFrameNum = int((curState->end - curState->start) * (float)FPS);
+				int CurrentMotionIndex = Time2Frame(curState->start);
+				int CurrentMotionFrameNum = Time2Frame((curState->end - curState->start));
 				int annindex = CurrentMotion->GetAnnIndex();
-				int MotionStartFrameIndex = int(Annotation->GetState(annindex)->start * float(FPS));
+				int MotionStartFrameIndex = Time2Frame(Annotation->GetState(annindex)->start);
 
 
 				for (int i = 0; i < CurrentMotionFrameNum; i++)
@@ -1094,8 +1120,8 @@ bool XBGraph::LabelNodesType()
 	{
 		XBKeyState* state = Annotation->GetState(stateindex);
 
-		int startframe = int(state->start * float(FPS));
-		int endframe = int(state->end * float(FPS));
+		int startframe = Time2Frame(state->start);
+		int endframe = Time2Frame(state->end);
 
 		for (int i = startframe; i < endframe; i++)
 		{

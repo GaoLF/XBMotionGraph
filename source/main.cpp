@@ -21,7 +21,7 @@ int main()
 
 	//Init the input animation and the input annotation
 	ann->LoadJson("Annotation/input1.json");
-	processor->LoadBVHFile("Motion/input1.bvh", ani, ann); 
+	processor->LoadBVHFile("Motion/input2.bvh", ani, ann); 
 	ani->DownSampleFPS();
 	ani->DownSampleSkeleton(NoitmBVHMask);
 	ann->SetTotalDuration(ani->GetFrameNum() * ani->GetFrameTime());
@@ -38,9 +38,9 @@ int main()
 	graph->LoadMotionGraphData("Motion/TestMotionGraph1.data");
 #endif
 	graph->PrintMotionGraph();
-	aim_ann->LoadJson("Annotation/test1.json");
+	aim_ann->LoadJson("Annotation/test1.json", true);
 	output_ani = graph->Traverse(aim_ann);
 	
-	processor->ExportBVHFile("Motion/output1.bvh", ani);
+	processor->ExportBVHFile("Motion/output1.bvh", output_ani);
 	return 0;
 }

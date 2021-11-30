@@ -27,7 +27,7 @@ XBAnnotation::XBAnnotation()
 	TotalDuration = -1.f;
 }
 
-bool XBAnnotation::LoadJson(string filename)
+bool XBAnnotation::LoadJson(string filename, bool Aimed)
 {
 	if (ParseJson(filename) == false)
 	{
@@ -35,30 +35,46 @@ bool XBAnnotation::LoadJson(string filename)
 		return false;
 	}
 
-	if (TotalDuration > 0)
+	if (Aimed)
 	{
-		if (AddIdleState() == false)
+		float maxend = -1;
+		for (int i = 0; i < states.size(); i++)
 		{
-			cerr << "Failed to Add Idle State!" << endl;
-			return false;
+			if (states[i]->end > maxend)
+			{
+				maxend = states[i]->end;
+			}
 		}
 
-		if (ConstuctStateMap() == false)
+		TotalDuration = maxend;
+
+		if (TotalDuration > 0 && 1)
 		{
-			cerr << "Failed to Construct State Map!" << endl;
-			return false;
+			//if (AddIdleState() == false)
+			//{
+			//	cerr << "Failed to Add Idle State!" << endl;
+			//	return false;
+			//}
+
+			if (ConstuctStateMap() == false)
+			{
+				cerr << "Failed to Construct State Map!" << endl;
+				return false;
+			}
+
+			if (SortStates() == false)
+			{
+				cerr << "Failed to Sort State!" << endl;
+				return false;
+			}
 		}
 
-		if (SortStates() == false)
-		{
-			cerr << "Failed to Sort State!" << endl;
-			return false;
-		}
 	}
 
-	
-
-	cout << "Succeed to Load Json without add idle: " << filename << endl;
+	if (Aimed)
+		cout << "Succeed to Load Train Json: "<< filename << endl;
+	else
+		cout << "Succeed to Load Try Json: " << filename << endl;
 	return true;
 }
 
