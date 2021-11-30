@@ -13,12 +13,12 @@ XBAnimation::XBAnimation()
 
 XBAnimation::~XBAnimation()
 {
-	for (int i = 0; i < Ani.size(); i++)
+	for (int i = 0; i < (int)Ani.size(); i++)
 	{
 		delete Ani[i];
 	}
 
-	for (int j = 0; j < AniForCostCalculation.size(); j++)
+	for (int j = 0; j < (int)AniForCostCalculation.size(); j++)
 	{
 		delete AniForCostCalculation[j];
 	}

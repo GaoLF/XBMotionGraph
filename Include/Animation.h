@@ -6,11 +6,14 @@
 
 class XBAnimation
 {
-public:
-	XBAnimation();
 
 public:
+
 	//Primary Function
+
+	XBAnimation();
+
+	~XBAnimation();
 
 	//Public Function
 	vector<XBPose*>& GetAni()

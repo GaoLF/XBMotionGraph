@@ -28,7 +28,7 @@ XBAnnotation::XBAnnotation()
 
 XBAnnotation::~XBAnnotation()
 {
-	for (int i = 0; i < states.size(); i++)
+	for (int i = 0; i < (int)states.size(); i++)
 	{
 		delete states[i];
 	}
@@ -45,7 +45,7 @@ bool XBAnnotation::LoadJson(string filename, bool Aimed)
 	if (Aimed)
 	{
 		float maxend = -1;
-		for (int i = 0; i < states.size(); i++)
+		for (int i = 0; i < (int)states.size(); i++)
 		{
 			if (states[i]->end > maxend)
 			{

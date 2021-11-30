@@ -119,9 +119,7 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 
 	LabelNodesType();
 
-#if TEST_METHOD_2
-	ConstructMotions();
-#endif
+
 
 	cout << "Succeed to Construct the Motion Graph!" << endl;
 	return true;
@@ -200,12 +198,12 @@ bool XBGraph::SaveMotionGraphData(string file)
 
 	for (int i = 0; i < (int)Nodes.size(); i++)
 	{
-		DataStr = to_string(Nodes[i]->GetIndex()) + " ";
+		DataStr += to_string(Nodes[i]->GetIndex()) + " ";
 
 		for (int j = 0; j < (int)Nodes[i]->GetEdges().size(); j++)
 		{
-			DataStr += Nodes[i]->GetEdges()[j]->GetDst()->GetIndex() + " ";
-			DataStr += to_string(Nodes[i]->GetEdges()[j]->GetDist()) + " ";
+			DataStr += to_string(Nodes[i]->GetEdges()[j]->GetDst()->GetIndex()) + " ";
+			//DataStr += to_string(Nodes[i]->GetEdges()[j]->GetDist()) + " ";
 		}
 		DataStr += "\n";
 	}
@@ -228,6 +226,8 @@ bool XBGraph::SaveMotionGraphData(string file)
 			DataStr += to_string(tmp_loc[0]) + " " + to_string(tmp_loc[1]) + " " + to_string(tmp_loc[2]) + " ";
 			DataStr += to_string(tmp_rot[0]) + " " + to_string(tmp_rot[1]) + " " + to_string(tmp_rot[2]) + " ";
 		}
+
+		DataStr += "\n";
 
 	}
 
@@ -276,13 +276,6 @@ bool XBGraph::LoadMotionGraphData(string file)
 		}
 		else if (flag == 1)
 		{
-			if (NodeIndex == NodeNum)
-			{
-				flag = 2;
-				NodeIndex = 0;
-				continue;
-			}
-
 			vector<string> splitstrs;
 			split(tmp, splitstrs, " ");
 			
@@ -300,11 +293,11 @@ bool XBGraph::LoadMotionGraphData(string file)
 			XBNode* tmpNode = Nodes[NodeIndex];
 			
 			int length = (int)splitstrs.size();
-			int edgeNum = (length - 1) / 2;
-			for (int j = 1; j < edgeNum; j += 2)
+			int edgeNum = (length);
+			for (int j = 1; j < edgeNum; j ++)
 			{
 				int tmp_index  = (int)atoi(splitstrs[j].c_str());
-				float tmp_dist = (float)atof(splitstrs[j + 1].c_str());
+				//float tmp_dist = (float)atof(splitstrs[j + 1].c_str());
 
 				XBEdge* newEdge = new XBEdge();
 				newEdge->SetSrc(tmpNode);
@@ -312,12 +305,18 @@ bool XBGraph::LoadMotionGraphData(string file)
 				{
 					newEdge->SetDst(Nodes[tmp_index]);
 				}
-				newEdge->SetDist(tmp_dist);
+				//newEdge->SetDist(tmp_dist);
 		
 				tmpNode->AddEdge(newEdge);
 			}
 
 			NodeIndex++;
+
+			if (NodeIndex == NodeNum)
+			{
+				flag = 2;
+				NodeIndex = 0;
+			}
 		}
 		else if (flag == 2)
 		{

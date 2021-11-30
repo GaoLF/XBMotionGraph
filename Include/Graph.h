@@ -21,6 +21,27 @@ public:
 
 public:
 	//Public Function
+
+	XBAnimation* GetAnimation()
+	{
+		return Animation;
+	}
+
+	void SetAnimation(XBAnimation* Ani)	
+	{
+		Animation = Ani;
+	}
+
+	XBAnnotation* GetAnnotation()
+	{
+		return Annotation;
+	}
+
+	void SetAnnotation(XBAnnotation* Ann)
+	{
+		Annotation = Ann;
+	}
+
 	bool Construction(XBAnimation* ani, XBAnnotation* ann);
 
 	XBAnimation* Traverse(XBAnnotation* tryann);
