@@ -4,8 +4,8 @@
 #include "Skeleton.h"
 using namespace std;
 
-#define FIRST_CONSTRUCT_GRAPH 1
-#define LOAD_GRAPH_FROM_EXISTEDDATA 0
+#define FIRST_CONSTRUCT_GRAPH 0
+#define LOAD_GRAPH_FROM_EXISTEDDATA 1
 
 
 int main()

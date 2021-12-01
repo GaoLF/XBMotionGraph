@@ -105,14 +105,14 @@ public:
 
 	//以后再处理第一个state是idle的问题
 	//不然的话，也要分好多种情况
-	bool ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState);
+	bool ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState, int &lastindex);
 
 	//many situations
 	//cur: keystate -> last: keystate
 	//cur: keystate -> last: idle
 	//cur: idle -> last: keystate
 	//Do not exist: cur: idle -> last: idle
-	bool ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState);
+	bool ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState, int &lastindex);
 
 	bool SetMotionState();
 #endif

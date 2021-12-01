@@ -657,7 +657,7 @@ bool XBGraph::ConstructMotions()
 						{
 							XBNode* cur_level_dstnode = cur_level_startnode->GetEdge(edge_index)->GetDst();
 
-							if (root_node->EdgesContainNode(level - 1, cur_level_dstnode) == false)
+							//if (root_node->EdgesContainNode(level - 1, cur_level_dstnode) == false)
 							{
 								if (find(Tmp_node_Array2.begin(), Tmp_node_Array2.end(), cur_level_dstnode) == Tmp_node_Array2.end())
 								{
@@ -741,7 +741,7 @@ bool XBGraph::TraverseHandleMotions(XBAnimation* NewAni, XBAnnotation* tryann)
 		}
 	}
 
-
+	int lastindex = 0;
 	for (int AnnStateIndex = 0; AnnStateIndex < (int)tryann->GetStates().size(); AnnStateIndex++)
 	{
 		XBKeyState* curState = tryann->GetState(AnnStateIndex);
@@ -755,7 +755,7 @@ bool XBGraph::TraverseHandleMotions(XBAnimation* NewAni, XBAnnotation* tryann)
 
 		if (AnnStateIndex == 0)
 		{
-			if (ConstructAniByFirstState(NewAni, curState) == false)
+			if (ConstructAniByFirstState(NewAni, curState, lastindex) == false)
 			{
 				return false;
 			}
@@ -769,7 +769,7 @@ bool XBGraph::TraverseHandleMotions(XBAnimation* NewAni, XBAnnotation* tryann)
 				return false;
 			}
 
-			if (ConstructAniByTwoStates(NewAni, curState, lastState) == false)
+			if (ConstructAniByTwoStates(NewAni, curState, lastState, lastindex) == false)
 			{
 				return false;
 			}
@@ -779,7 +779,7 @@ bool XBGraph::TraverseHandleMotions(XBAnimation* NewAni, XBAnnotation* tryann)
 	return true;
 }
 
-bool XBGraph::ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState)
+bool XBGraph::ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState, int& lastindex)
 {
 	if (NewAni == nullptr)
 	{
@@ -831,12 +831,13 @@ bool XBGraph::ConstructAniByFirstState(XBAnimation* NewAni, XBKeyState* curState
 		
 		NewAni->GetAni()[i] = Nodes[cur_frame_index]->GetPose();
 
+		lastindex = cur_frame_index;
 	}
 
 	return true;
 }
 
-bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState)
+bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState, XBKeyState* lastState, int& lastindex)
 {
 	if (NewAni == NULL || curState == NULL || lastState == NULL)
 	{
@@ -857,8 +858,9 @@ bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState,
 		}
 	}
 
-	int startindex = Time2FrameIndex(lastState->end);
-
+	//int startindex = Time2FrameIndex(lastState->end);
+	int startindex = lastindex + 1;
+	
 	//key -> key
 	if (isKeyAction(lastState->action) && isKeyAction(curState->action))
 	{
