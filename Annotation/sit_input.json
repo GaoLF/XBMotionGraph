@@ -1,0 +1,16 @@
+{
+"FrameNumber": 2000,
+"Annotations": [
+{
+	"start":3.46,
+	"end":4.96,
+	"action":"Hug"
+},
+
+{
+	"start":32.7,
+	"end":36.6,
+	"action":"WaveHand"
+}
+]
+}

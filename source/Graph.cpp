@@ -67,13 +67,13 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 
 		//Set the Threshold
 		float threshold = DEFAULT_NODE_THRESHOLD;
-		if ((i + 3) < (int)poses.size())
+		if ((i + THRESHOLD_K) < (int)poses.size())
 		{
-			threshold = XBCost::Dist(poseFCCs[i], poseFCCs[i + 3]);
+			threshold = XBCost::Dist(poseFCCs[i], poseFCCs[i + THRESHOLD_K]);
 		}
-		else if (i >= 3)
+		else if (i >= THRESHOLD_K)
 		{
-			threshold = XBCost::Dist(poseFCCs[i], poseFCCs[i - 3]);
+			threshold = XBCost::Dist(poseFCCs[i], poseFCCs[i - THRESHOLD_K]);
 		}
 
 		newNode->SetThreshold(threshold);
@@ -100,6 +100,13 @@ bool XBGraph::Construction(XBAnimation* ani, XBAnnotation* ann)
 				continue;
 
 			float threshold = CurNode->GetThreshold();
+
+			//For Debug
+			if (i == 235 && j == 223)
+			{
+				int x = 0;
+				cout << x << endl;
+			}
 
 			float dist = XBCost::Dist(CurNode->GetPoseForCostCalculation(), Nodes[j]->GetPoseForCostCalculation());
 			if (dist < threshold)
@@ -907,18 +914,24 @@ bool XBGraph::ConstructAniByTwoStates(XBAnimation* NewAni, XBKeyState* curState,
 
 		if (bMatched)
 		{
+
 			for (int i = 0; i < (endinverseindex + interval); i++)
 			{
 				XBNode* tmp_node = Nodes[tmp_path[i]];
 				if (tmp_node)
 				{
-					NewAni->GetAni()[startindex - endinverseindex + i] = tmp_node->GetPose();
+					int CurrentStartIndex = Time2Frame(lastState->end);
+					NewAni->GetAni()[CurrentStartIndex - endinverseindex + i] = tmp_node->GetPose();
+
+					//For Debug
+					cout << tmp_node->GetIndex() << " ";
 				}
 				else
 				{
 					cerr << "Failed to Build the Ani!" << endl;
 				}
 			}
+			cout << endl;
 
 			if (CurrentMotion)
 			{

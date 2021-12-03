@@ -36,9 +36,11 @@ bool XBBVNProcessor::LoadBVHFile(string name, XBAnimation* Ani, XBAnnotation* An
 
 	bool bFirstPose = true;
 	char c[10000];
-	vector<vector<CHANNEL_FLAG>> Channels;
+
 	int CurrentFrameNum = 0;
 	vector<float> floatnums;
+
+	Channels.clear();
 
 	while (inFile.getline(c, 10000)) 
 	{
@@ -214,11 +216,30 @@ bool XBBVNProcessor::ExportBVHFile(string name, XBAnimation* Ani)
 
 		for (int j = 0; j < length; j++)
 		{
-			tmp += (to_string(Pose->GetLocations()[j][0]) + " " + to_string(Pose->GetLocations()[j][1])
-				+ " "  + to_string(Pose->GetLocations()[j][2]) + " ");
+			for (int index = 0; index < 6; index++)
+			{
+				CHANNEL_FLAG flag = Channels[j][index];
 
-			tmp += (to_string(Pose->GetRotations()[j][2]) + " " + to_string(Pose->GetRotations()[j][1])
-				+ " "  + to_string(Pose->GetRotations()[j][0]) + " ");
+				if (flag == CHANNEL_FLAG::XPOSITION)
+					tmp += to_string(Pose->GetLocations()[j][0]) + " ";
+				else if (flag == CHANNEL_FLAG::YPOSITION)
+					tmp += to_string(Pose->GetLocations()[j][1]) + " ";
+				else if (flag == CHANNEL_FLAG::ZPOSITION)
+					tmp += to_string(Pose->GetLocations()[j][2]) + " ";
+				else if (flag == CHANNEL_FLAG::XROTATION)
+					tmp += to_string(Pose->GetRotations()[j][0]) + " ";
+				else if (flag == CHANNEL_FLAG::YROTATION)
+					tmp += to_string(Pose->GetRotations()[j][1]) + " ";
+				else if (flag == CHANNEL_FLAG::ZROTATION)
+					tmp += to_string(Pose->GetRotations()[j][2]) + " ";
+
+			}
+
+			//tmp += (to_string(Pose->GetLocations()[j][0]) + " " + to_string(Pose->GetLocations()[j][1])
+			//	+ " "  + to_string(Pose->GetLocations()[j][2]) + " ");
+
+			//tmp += (to_string(Pose->GetRotations()[j][2]) + " " + to_string(Pose->GetRotations()[j][1])
+			//	+ " "  + to_string(Pose->GetRotations()[j][0]) + " ");
 		}
 		tmp += "\n";
 

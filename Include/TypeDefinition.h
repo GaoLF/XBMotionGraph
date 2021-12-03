@@ -8,9 +8,10 @@
 #include <time.h> 
 
 #define DEFAULT_NODE_THRESHOLD (100000000.f)
+#define THRESHOLD_MAXLIMIT (8000.f)
 
 //The Parameter K in the Yang(2020) Paper
-#define THRESHOLD_K (int(3))
+#define THRESHOLD_K (int(5))
 
 //two First Frame selection Methods
 #define SECTION_RANDOMACESS 1
@@ -103,9 +104,9 @@ enum class MOTION_EDGE_TYPE
 	MOTIONEDGETYPENUM,
 };
 
-#define ACTION_START_FRAME_NUM (5)
-#define ACTION_END_FRAME_NUM   (5)
-#define MOTION_EDGE_FRAMENUM   (15)
+#define ACTION_START_FRAME_NUM (10)
+#define ACTION_END_FRAME_NUM   (10)
+#define MOTION_EDGE_FRAMENUM   (20)
 #endif
 
 const std::string Str_Action_Type[] = {
@@ -136,5 +137,49 @@ static int Time2FrameIndex(float time_value)
 {
 	return Time2Frame(time_value);
 }
+
+//Data Base
+#define OURS 0
+#define YANG 1
+
+#if OURS
+static std::string input_bvh_filename = "input2.bvh";
+static std::string output_bvh_filename = "output2.bvh";
+static std::string input_ann_filename = "input2.json";
+static std::string output_ann_filename = "test2.json";
+static std::string saved_mg_filename = "TestMotionGraph_k=3.data";
+#elif YANG
+
+static std::string input_bvh_filename = "sit.bvh";
+static std::string output_bvh_filename = "sit_output.bvh";
+
+static std::string input_ann_filename = "sit_input.json";
+static std::string output_ann_filename = "sit_test.json";
+
+static std::string saved_mg_filename = "TestMotionGraph_sit_k=3.data";
+#endif
+
+static float GetDiffof2Rots(float rot1, float rot2)
+{
+	float ret = 0;
+	float sum = rot1 + rot2;
+	if (sum <-172.f && sum > -188.f)
+	{
+		rot1 = -180 - rot1;
+	}
+	else if (sum < 188.f && sum >172.f)
+	{
+		rot1 = 180 - rot1;
+	}
+	float diff = (float)abs(rot1 - rot2);
+	if (diff > 180.f)
+		diff = 360.f - diff;
+	if (diff > 175 && diff < 185)
+		diff = diff - 180.f;
+
+	return diff;
+}
+
+
 
 #endif//_TYPEDEFINITION_H

@@ -4,8 +4,8 @@
 #include "Skeleton.h"
 using namespace std;
 
-#define FIRST_CONSTRUCT_GRAPH 0
-#define LOAD_GRAPH_FROM_EXISTEDDATA 1
+#define FIRST_CONSTRUCT_GRAPH 1
+#define LOAD_GRAPH_FROM_EXISTEDDATA 0
 
 
 int main()
@@ -20,10 +20,17 @@ int main()
 	XBAnnotation* aim_ann = new XBAnnotation();
 
 	//Init the input animation and the input annotation
-	ann->LoadJson("Annotation/input2.json");
-	processor->LoadBVHFile("Motion/input2.bvh", ani, ann); 
+
+	ann->LoadJson("Annotation/" + input_ann_filename);
+	processor->LoadBVHFile("Motion/" + input_bvh_filename, ani, ann);
+
 	ani->DownSampleFPS();
+#if OURS
 	ani->DownSampleSkeleton(NoitmBVHMask);
+#elif YANG
+	ani->DownSampleSkeleton(YangBVHMask);
+#endif
+
 	ann->SetTotalDuration(ani->GetFrameNum() * ani->GetFrameTime());
 	ann->AddIdleState();
 	ann->ConstuctStateMap();
@@ -33,10 +40,10 @@ int main()
 	XBGraph* graph = new XBGraph();
 	graph->Construction(ani, ann);
 
-	graph->SaveMotionGraphData("Motion/TestMotionGraph2.data");
+	graph->SaveMotionGraphData("Motion/" + saved_mg_filename);
 #elif LOAD_GRAPH_FROM_EXISTEDDATA
 	XBGraph* graph = new XBGraph();
-	graph->LoadMotionGraphData("Motion/TestMotionGraph2.data");
+	graph->LoadMotionGraphData("Motion/" + saved_mg_filename);
 	graph->SetAnimation(ani);
 	graph->SetAnnotation(ann);
 #endif
@@ -45,10 +52,12 @@ int main()
 	graph->ConstructMotions();
 #endif
 
-	graph->PrintMotionGraph();
-	aim_ann->LoadJson("Annotation/test2.json", true);
+	//graph->PrintMotionGraph();
+
+	aim_ann->LoadJson("Annotation/" + output_ann_filename, true);
+
 	output_ani = graph->Traverse(aim_ann);
 	
-	processor->ExportBVHFile("Motion/output2.bvh", output_ani);
+	processor->ExportBVHFile("Motion/" + output_bvh_filename, output_ani);
 	return 0;
 }

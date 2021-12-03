@@ -44,7 +44,7 @@ public:
 private:
 
 	int skeletelonnum;
-
+	vector<vector<CHANNEL_FLAG>> Channels;
 };
 
 #endif // _ANIMATION_H

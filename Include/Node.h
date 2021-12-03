@@ -68,7 +68,10 @@ public :
 
 	void SetThreshold(float value)
 	{
-		Threshold = value;
+		if (value > THRESHOLD_MAXLIMIT)
+			Threshold = THRESHOLD_MAXLIMIT;
+		else
+			Threshold = value;
 	};
 
 	void SetIndex(int value)
